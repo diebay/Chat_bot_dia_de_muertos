@@ -1,0 +1,1498 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Guía de Ofrenda · Día de Muertos</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Ctext y=%27.9em%27 font-size=%2790%27%3E%F0%9F%8C%BC%3C/text%3E%3C/svg%3E">
+<meta name="color-scheme" content="light dark">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Young+Serif&display=swap" rel="stylesheet">
+<style>
+  :root {
+    color-scheme: light;
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+
+    --bg: #F6EFF8;
+    --surface: #FFFFFF;
+    --ink: #2B1745;
+    --muted: #65547C;
+    --line: #D9CBE5;
+    --accent: #A8125F;
+    --on-accent: #FFFFFF;
+    --focus: #6B3FA0;
+
+    --papel-1: #D81B7B;
+    --papel-2: #F5A200;
+    --papel-3: #0AA6A0;
+    --papel-4: #7A4CB8;
+    --papel-5: #F26B21;
+
+    --serif: "Young Serif", Georgia, "Times New Roman", serif;
+    --sans: "Figtree", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --bg: #1C1030;
+      --surface: #2A1948;
+      --ink: #F7EEFF;
+      --muted: #BCAAD6;
+      --line: #4B3872;
+      --accent: #F5A200;
+      --on-accent: #1C1030;
+      --focus: #FFD36B;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --bg: #1C1030;
+    --surface: #2A1948;
+    --ink: #F7EEFF;
+    --muted: #BCAAD6;
+    --line: #4B3872;
+    --accent: #F5A200;
+    --on-accent: #1C1030;
+    --focus: #FFD36B;
+  }
+
+  html { height: 100%; background: var(--bg); scroll-padding-top: env(safe-area-inset-top, 0px); }
+  body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  :focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+
+  /* ---------- Papel picado ---------- */
+  .banner {
+    position: relative;
+    display: flex;
+    overflow: hidden;
+    white-space: nowrap;
+    flex: none;
+    height: 56px;
+  }
+  .banner::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 2px;
+    background: var(--ink);
+    opacity: .45;
+  }
+  .flag {
+    flex: none;
+    width: 44px;
+    height: 55px;
+    margin-top: 1px;
+    transform-origin: 50% 0;
+    animation: sway 2.8s ease-out both;
+    animation-delay: calc(var(--i) * 30ms);
+  }
+  .flag:nth-child(even) { animation-direction: reverse; }
+  .flag:nth-child(5n+1) { color: var(--papel-1); }
+  .flag:nth-child(5n+2) { color: var(--papel-2); }
+  .flag:nth-child(5n+3) { color: var(--papel-3); }
+  .flag:nth-child(5n+4) { color: var(--papel-4); }
+  .flag:nth-child(5n+5) { color: var(--papel-5); }
+  @keyframes sway {
+    0%   { transform: rotate(0deg); }
+    25%  { transform: rotate(4deg); }
+    60%  { transform: rotate(-2.5deg); }
+    100% { transform: rotate(0deg); }
+  }
+  @media (min-width: 640px) {
+    .banner { height: 70px; }
+    .flag { width: 56px; height: 70px; }
+  }
+
+  /* ---------- Encabezado ---------- */
+  .topbar {
+    flex: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    width: 100%;
+    max-width: 760px;
+    margin: 0 auto;
+    padding: .75rem 1rem .25rem;
+  }
+  .brand { display: flex; align-items: center; gap: .6rem; font-family: var(--serif); font-size: 1.2rem; }
+  .brand svg { width: 28px; height: 28px; flex: none; }
+  .ghost {
+    font: inherit;
+    font-size: .9rem;
+    font-weight: 600;
+    min-height: 44px;
+    padding: 0 .9rem;
+    color: var(--ink);
+    background: transparent;
+    border: 1.5px solid var(--line);
+    border-radius: 12px;
+    cursor: pointer;
+  }
+  .ghost:hover { border-color: var(--accent); }
+  .ghost[hidden] { display: none; }
+
+  /* ---------- Conversación ---------- */
+  .log {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding: .5rem 1rem 1rem;
+  }
+  .thread { width: 100%; max-width: 760px; margin: 0 auto; }
+
+  .hero { padding: 1.5rem 0 .5rem; }
+  .hero[hidden] { display: none; }
+  .hero h1 {
+    margin: 0 0 .6rem;
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(1.9rem, 6.5vw, 3rem);
+    line-height: 1.1;
+    max-width: 16ch;
+  }
+  .hero p { margin: 0 0 1.25rem; color: var(--muted); max-width: 52ch; }
+  .chips { display: flex; flex-wrap: wrap; gap: .5rem; }
+  .chip {
+    font: inherit;
+    font-size: .95rem;
+    min-height: 44px;
+    padding: .55rem 1rem;
+    color: var(--ink);
+    background: var(--surface);
+    border: 1.5px solid var(--line);
+    border-radius: 999px;
+    cursor: pointer;
+    text-align: left;
+  }
+  .chip:hover { border-color: var(--accent); }
+
+  .msg { margin: 1.1rem 0; }
+  .msg.user { display: flex; justify-content: flex-end; }
+  .msg.user .bubble {
+    max-width: 88%;
+    padding: .65rem 1rem;
+    background: var(--accent);
+    color: var(--on-accent);
+    border-radius: 18px 18px 4px 18px;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+  }
+  .msg.guide .text {
+    max-width: 66ch;
+    font-size: 1.0625rem;
+    line-height: 1.65;
+    overflow-wrap: anywhere;
+  }
+  .text p { margin: 0 0 .8rem; }
+  .text p:last-child, .text ul:last-child, .text ol:last-child { margin-bottom: 0; }
+  .text ul, .text ol { margin: 0 0 .8rem; padding-left: 1.3rem; }
+  .text li { margin: .25rem 0; }
+  .text h4 { margin: 1rem 0 .4rem; font-family: var(--serif); font-weight: 400; font-size: 1.15rem; }
+  .text strong { font-weight: 700; }
+  .note { margin: .5rem 0 0; font-size: .9rem; color: var(--muted); }
+
+  .thinking { display: inline-flex; gap: .35rem; align-items: center; color: var(--muted); font-size: .95rem; }
+  .thinking i {
+    width: 9px; height: 9px; border-radius: 50%;
+    background: var(--papel-2);
+    animation: pulse 1.2s ease-in-out infinite;
+  }
+  .thinking i:nth-child(2) { animation-delay: .15s; background: var(--papel-1); }
+  .thinking i:nth-child(3) { animation-delay: .3s; background: var(--papel-4); }
+  @keyframes pulse { 0%, 80%, 100% { transform: scale(.6); opacity: .5; } 40% { transform: scale(1); opacity: 1; } }
+
+  /* ---------- Escritura ---------- */
+  .composer { flex: none; border-top: 1px solid var(--line); background: var(--bg); padding: .75rem 1rem .5rem; }
+  .composer-inner { width: 100%; max-width: 760px; margin: 0 auto; }
+  .row { display: flex; gap: .5rem; align-items: flex-end; }
+  textarea {
+    flex: 1 1 auto;
+    min-height: 48px;
+    max-height: 9.5rem;
+    padding: .7rem .9rem;
+    font: inherit;
+    font-size: 1rem;
+    line-height: 1.4;
+    color: var(--ink);
+    background: var(--surface);
+    border: 1.5px solid var(--line);
+    border-radius: 14px;
+    resize: none;
+  }
+  textarea::placeholder { color: var(--muted); opacity: 1; }
+  textarea:disabled { opacity: .6; }
+  .send {
+    flex: none;
+    min-height: 48px;
+    padding: 0 1.25rem;
+    font: inherit;
+    font-weight: 700;
+    color: var(--on-accent);
+    background: var(--accent);
+    border: 1.5px solid var(--accent);
+    border-radius: 14px;
+    cursor: pointer;
+  }
+  .send.stop { color: var(--ink); background: transparent; border-color: var(--line); }
+  .send:disabled { opacity: .5; cursor: not-allowed; }
+  .fine { margin: .5rem 0 0; font-size: .8rem; color: var(--muted); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .flag { animation: none; }
+    .thinking i { animation: none; opacity: 1; transform: none; }
+  }
+
+  /* ---------- Versión sin IA: acciones, botones dentro de las respuestas ---------- */
+  .acciones { display: flex; gap: .5rem; align-items: center; }
+  .chips + .chips { margin-top: .75rem; }
+  .chip.tema { background: transparent; border-color: var(--accent); }
+  .chip.tema:hover { background: var(--surface); }
+  .followups { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: .6rem; max-width: 66ch; }
+  .followups .chip { font-size: .9rem; padding: .45rem .9rem; }
+  .msg.guide .note { margin: .8rem 0 0; }
+  .text em { font-style: italic; }
+  .send { cursor: pointer; }
+
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <!-- Bandera de papel picado: los huecos se hacen con fill-rule evenodd -->
+    <symbol id="papel" viewBox="0 0 64 80">
+      <path fill="currentColor" fill-rule="evenodd" d="
+        M0 0H64V70L56 80L48 70L40 80L32 70L24 80L16 70L8 80L0 70Z
+        M20 26a12 12 0 1 0 24 0a12 12 0 1 0 -24 0Z
+        M32 18L40 26L32 34L24 26Z
+        M10 52a3.5 3.5 0 1 0 7 0a3.5 3.5 0 1 0 -7 0Z
+        M28.5 52a3.5 3.5 0 1 0 7 0a3.5 3.5 0 1 0 -7 0Z
+        M47 52a3.5 3.5 0 1 0 7 0a3.5 3.5 0 1 0 -7 0Z
+        M0 0L6 0L0 6Z M64 0L58 0L64 6Z"/>
+    </symbol>
+    <!-- Flor de cempasúchil -->
+    <symbol id="cempasuchil" viewBox="0 0 32 32">
+      <g fill="#F5A200">
+        <ellipse cx="16" cy="7" rx="4.2" ry="6"/>
+        <ellipse cx="16" cy="7" rx="4.2" ry="6" transform="rotate(45 16 16)"/>
+        <ellipse cx="16" cy="7" rx="4.2" ry="6" transform="rotate(90 16 16)"/>
+        <ellipse cx="16" cy="7" rx="4.2" ry="6" transform="rotate(135 16 16)"/>
+        <ellipse cx="16" cy="7" rx="4.2" ry="6" transform="rotate(180 16 16)"/>
+        <ellipse cx="16" cy="7" rx="4.2" ry="6" transform="rotate(225 16 16)"/>
+        <ellipse cx="16" cy="7" rx="4.2" ry="6" transform="rotate(270 16 16)"/>
+        <ellipse cx="16" cy="7" rx="4.2" ry="6" transform="rotate(315 16 16)"/>
+      </g>
+      <circle cx="16" cy="16" r="5" fill="#F26B21"/>
+    </symbol>
+  </defs>
+</svg>
+
+<div class="banner" id="banner" aria-hidden="true"></div>
+
+<header class="topbar">
+  <div class="brand">
+    <svg aria-hidden="true"><use href="#cempasuchil"></use></svg>
+    <span>Guía de Ofrenda</span>
+  </div>
+  <div class="acciones">
+    <button class="ghost" id="btn-temas" type="button">Temas</button>
+    <button class="ghost" id="reset" type="button" hidden>Nueva conversación</button>
+  </div>
+</header>
+
+<main class="log" id="log" role="log" aria-label="Conversación" aria-live="polite">
+  <div class="thread" id="thread">
+    <section class="hero" id="hero">
+      <h1>¿Qué quieres saber del Día de Muertos?</h1>
+      <p>Escribe tu pregunta o toca una de las sugeridas. También puedes explorar por tema.</p>
+      <div class="chips" id="sugerencias"></div>
+      <div class="chips" id="temas" role="group" aria-label="Temas"></div>
+    </section>
+  </div>
+</main>
+
+<div class="composer">
+  <div class="composer-inner">
+    <div class="row">
+      <textarea id="input" rows="1" maxlength="200" aria-label="Escribe tu pregunta" placeholder="Escribe tu pregunta sobre el Día de Muertos"></textarea>
+      <button class="send" id="send" type="button">Enviar</button>
+    </div>
+    <p class="fine">Esta guía no usa inteligencia artificial: responde con información preparada de antemano y puede no tener tu pregunta. Para tareas, contrasta los datos con tu libro de texto o con fuentes oficiales.</p>
+  </div>
+</div>
+
+<script>
+/*
+ * BASE DE CONOCIMIENTO · Guía de Ofrenda (versión sin IA)
+ *
+ * Aquí vive TODO lo que sabe el bot. Para ampliarlo basta con agregar entradas
+ * al arreglo "entradas" (no hace falta tocar nada más). Cada entrada tiene:
+ *
+ *   id            nombre único, sin espacios (se usa en "relacionadas")
+ *   tema          uno de los ids de "temas"
+ *   pregunta      la pregunta principal (también se muestra como botón)
+ *   variantes     otras formas en que la gente puede preguntar lo mismo
+ *   clave         frases características; si aparecen en la pregunta, suben la puntuación
+ *   respuesta     texto de la respuesta (admite **negritas**, *cursivas* y listas con "- " o "1. ")
+ *   relacionadas  ids de otras entradas que se sugieren después de responder
+ *
+ * Consejo: mientras más variantes escribas (con las palabras que usan tus alumnos),
+ * mejor entenderá el bot. Los acentos y mayúsculas no importan.
+ */
+var CONOCIMIENTO = {
+
+  temas: [
+    { id: "origen",    nombre: "Origen e historia" },
+    { id: "ofrenda",   nombre: "La ofrenda" },
+    { id: "elementos", nombre: "Flores, comida y objetos" },
+    { id: "fechas",    nombre: "Fechas y panteón" },
+    { id: "regiones",  nombre: "Tradiciones por región" },
+    { id: "arte",      nombre: "Arte y cultura popular" },
+    { id: "mundo",     nombre: "Comparaciones y otros países" },
+    { id: "practico",  nombre: "Tareas y participación" }
+  ],
+
+  // Preguntas que aparecen como botones en la pantalla de inicio
+  sugerencias: ["elementos", "halloween", "janitzio", "catrina", "escribir-calaverita", "unesco"],
+
+  // Palabras que significan lo mismo (todo en minúsculas y sin acentos)
+  sinonimos: {
+    altar: "ofrenda", altares: "ofrenda",
+    difunto: "muerto", difuntos: "muerto", difunta: "muerto", difuntas: "muerto",
+    finado: "muerto", finados: "muerto", fallecido: "muerto", fallecidos: "muerto", fallecida: "muerto",
+    veladora: "vela", veladoras: "vela",
+    catrin: "catrina", catrines: "catrina",
+    calaca: "calavera", calacas: "calavera", esqueleto: "calavera", esqueletos: "calavera",
+    cementerio: "panteon", cementerios: "panteon", tumba: "panteon", tumbas: "panteon", camposanto: "panteon",
+    papalote: "barrilete", papalotes: "barrilete", cometa: "barrilete",
+    comer: "comida", come: "comida", comen: "comida", comemos: "comida", comiendo: "comida", alimento: "comida", alimentos: "comida",
+    platillo: "comida", platillos: "comida", comidas: "comida", guisado: "comida",
+    bebidas: "bebida", tomar: "bebida", beben: "bebida", trago: "bebida", tragos: "bebida",
+    cuando: "fecha", fechas: "fecha", calendario: "fecha",
+    donde: "lugar", lugares: "lugar", estados: "lugar", ciudades: "lugar",
+    inicio: "origen", origenes: "origen", surgio: "origen", nacio: "origen", empezo: "origen",
+    xolo: "xoloitzcuintle", xoloitzcuintles: "xoloitzcuintle",
+    ninos: "nino", ninas: "nino", infantes: "nino", chiquitos: "nino", pequenos: "nino",
+    bebe: "nino", bebes: "nino",
+    gato: "mascota", gatos: "mascota", perros: "mascota", mascotas: "mascota",
+    velar: "velacion", velan: "velacion", velando: "velacion", velamos: "velacion", velatorio: "velacion",
+    velada: "velacion", veladas: "velacion", velaciones: "velacion",
+    maquillarse: "maquillaje", disfrazarme: "maquillaje", disfraz: "maquillaje", disfrazarse: "maquillaje",
+    pintarse: "maquillaje",
+    tarea: "tarea", trabajo: "tarea", exponer: "exposicion", presentacion: "exposicion", expo: "exposicion",
+    concurso: "concurso", concursos: "concurso",
+    poema: "verso", poemas: "verso", versos: "verso", rima: "verso", rimas: "verso", rimar: "verso",
+    escribo: "escribir", redactar: "escribir", componer: "escribir",
+    armo: "armar", montar: "armar", montaje: "armar", construir: "armar", preparar: "armar",
+    instalar: "armar", decorar: "armar",
+    disney: "coco", pixar: "coco",
+    respetar: "respeto", respetuoso: "respeto", comportarme: "respeto", comportar: "respeto",
+    recordar: "honrar", recuerdo: "honrar", homenaje: "honrar", homenajear: "honrar",
+    mixquic: "mixquic", janitzio: "janitzio", patzcuaro: "janitzio",
+    yucatan: "yucatan", maya: "yucatan", mayas: "yucatan", hanal: "yucatan", pixan: "yucatan",
+    quintana: "yucatan", campeche: "yucatan", merida: "yucatan"
+  },
+
+  // Correcciones de escritura frecuentes (expresiones regulares sobre texto sin acentos)
+  frases: [
+    ["z?empa[sz]u?[ck]h?[iy]l|cempoalxochitl|zempoalxochitl|sempasuchil|cempaxuchitl|cempasuchitl", "cempasuchil"],
+    ["jalowin|jaloguin|jalowen|jaloween|hallowen|haloween", "halloween"],
+    ["dia de los muertos|dia de muertos|dia de los fieles difuntos", "dia de muertos"],
+    ["(el )?(primero|uno) de noviembre", "1 de noviembre"],
+    ["(el )?(segundo|dos) de noviembre", "2 de noviembre"],
+    ["(el )?treinta y uno de octubre", "31 de octubre"]
+  ],
+
+  entradas: [
+
+    /* ====================== ORIGEN E HISTORIA ====================== */
+    {
+      id: "que-es", tema: "origen",
+      pregunta: "¿Qué es el Día de Muertos?",
+      variantes: ["¿De qué trata el Día de Muertos?", "Explícame el Día de Muertos", "¿En qué consiste esta celebración?", "definición del día de muertos", "¿Qué es esta tradición mexicana?", "Cuéntame sobre el Día de Muertos", "Háblame del Día de Muertos", "Dame información sobre el Día de Muertos"],
+      clave: ["que es el dia de muertos", "que es dia de muertos", "de que trata", "en que consiste", "informacion del dia de muertos", "informacion sobre el dia de muertos", "sobre el dia de muertos", "hablame del dia de muertos", "algo del dia de muertos"],
+      respuesta: "El **Día de Muertos** es una celebración mexicana en la que las familias recuerdan a sus seres queridos que ya fallecieron. Se cree que durante estos días las almas pueden volver a visitar a sus familias, por eso se les prepara una **ofrenda** con flores, velas, comida y objetos que disfrutaban en vida.\n\nNo es una fiesta triste: mezcla recuerdo, cariño y hasta humor. Se celebra principalmente del **31 de octubre al 2 de noviembre**, y la UNESCO la reconoce como Patrimonio Cultural Inmaterial de la Humanidad.",
+      relacionadas: ["origen", "porque-se-celebra", "que-es-ofrenda"]
+    },
+    {
+      id: "origen", tema: "origen",
+      pregunta: "¿Cuál es el origen del Día de Muertos?",
+      variantes: ["¿De dónde viene el Día de Muertos?", "¿Cómo surgió esta tradición?", "historia del día de muertos", "¿Desde cuándo existe?", "¿Es prehispánico o español?", "¿Quién inventó el Día de Muertos?"],
+      clave: ["origen del dia de muertos", "de donde viene", "como surgio", "historia del dia de muertos", "es prehispanico", "desde cuando existe"],
+      respuesta: "Tiene **raíces prehispánicas y europeas**. Pueblos mesoamericanos, como los mexicas, ya tenían rituales y ofrendas para honrar a sus muertos. Con la llegada de los españoles, en el siglo XVI, esas costumbres se mezclaron con el calendario católico (Todos los Santos y Fieles Difuntos), y de esa fusión nació la celebración que conocemos.\n\nLos historiadores todavía discuten cuánto aporta cada tradición, y hoy cada región y comunidad la vive a su manera.",
+      relacionadas: ["mictlan", "sincretismo", "todos-santos"]
+    },
+    {
+      id: "mictlan", tema: "origen",
+      pregunta: "¿Qué es el Mictlán y cómo veían la muerte los mexicas?",
+      variantes: ["¿Qué es el Mictlán?", "¿Adónde iban los muertos para los mexicas?", "¿Quién es Mictlantecuhtli?", "¿Quién es Mictecacíhuatl?", "inframundo azteca", "¿Cuántos niveles tiene el Mictlán?", "viaje de las almas"],
+      clave: ["mictlan", "mictlantecuhtli", "mictecacihuatl", "inframundo", "viaje del alma", "aztecas", "mexicas"],
+      respuesta: "El **Mictlán** era, para los mexicas, el lugar de los muertos, gobernado por **Mictlantecuhtli** y **Mictecacíhuatl**. Según la tradición, el alma debía atravesar **nueve niveles** con pruebas y peligros, un viaje que se contaba de unos **cuatro años**, hasta llegar al descanso final.\n\nNo todos iban allá: el destino dependía de cómo moría la persona. Quienes morían en combate o de parto, por ejemplo, tenían otros destinos, y quienes morían por causas relacionadas con el agua iban al Tlalocan.\n\nLa idea de que el alma hace un viaje largo es una de las raíces de elementos como el agua, la sal y la comida en la ofrenda.",
+      relacionadas: ["xolo", "sal-agua", "origen"]
+    },
+    {
+      id: "sincretismo", tema: "origen",
+      pregunta: "¿Cómo se mezcló con las tradiciones católicas?",
+      variantes: ["¿Qué es el sincretismo en el Día de Muertos?", "¿Qué influencia tuvo la Conquista?", "¿Qué aportaron los españoles?", "religión y día de muertos", "mezcla de culturas indígena y española", "¿Es una fiesta católica?"],
+      clave: ["sincretismo", "conquista", "los espanoles", "mezcla de culturas", "catolic", "religion"],
+      respuesta: "Cuando llegaron los españoles trajeron las celebraciones católicas de **Todos los Santos (1 de noviembre)** y **Fieles Difuntos (2 de noviembre)**. Las costumbres indígenas para honrar a los muertos y las católicas se fueron combinando: las fechas se acercaron al calendario católico y aparecieron cruces, imágenes de santos y rezos junto a elementos como el cempasúchil, el copal y la comida.\n\nA esta mezcla de culturas se le llama **sincretismo**. Algunas fuentes señalan que, antes de la Conquista, los rituales para los muertos se hacían en otras épocas del calendario.",
+      relacionadas: ["todos-santos", "origen", "unesco"]
+    },
+    {
+      id: "todos-santos", tema: "origen",
+      pregunta: "¿Qué es el Día de Todos los Santos y de los Fieles Difuntos?",
+      variantes: ["¿Qué se celebra el 1 de noviembre?", "¿Qué se celebra el 2 de noviembre?", "diferencia entre todos los santos y fieles difuntos", "¿Qué son los fieles difuntos?"],
+      clave: ["todos los santos", "fieles difuntos", "fiel difunto"],
+      respuesta: "Son dos fechas del calendario católico. El **1 de noviembre** es el **Día de Todos los Santos**, en que la Iglesia honra a los santos. El **2 de noviembre** es la **Conmemoración de los Fieles Difuntos**, dedicada a rezar por quienes han fallecido.\n\nEn México estas fechas se encontraron con las tradiciones indígenas sobre los muertos y dieron forma al Día de Muertos actual.",
+      relacionadas: ["sincretismo", "fechas", "angelitos"]
+    },
+    {
+      id: "porque-se-celebra", tema: "origen",
+      pregunta: "¿Por qué se celebra el Día de Muertos?",
+      variantes: ["¿Cuál es el significado del Día de Muertos?", "¿Para qué sirve esta celebración?", "¿Qué se cree que pasa con las almas?", "¿Por qué los mexicanos celebran la muerte?", "¿Las almas regresan?", "sentido de la tradición", "¿Por qué celebramos a los muertos si es algo triste?", "¿Por qué los mexicanos celebran a los muertos?"],
+      clave: ["por que se celebra", "por que celebramos", "para que se celebra", "las almas regresan", "regresan las almas", "significado del dia de muertos", "relacion con la muerte"],
+      respuesta: "Porque en esta tradición el vínculo con quienes murieron **no se corta**: se cree que sus almas regresan a visitar a la familia. Celebrar es una manera de **recordarlos, agradecerles y mantenerlos presentes** con comida, música, historias y flores.\n\nTambién refleja una relación cercana con la muerte: se la enfrenta con cariño y a veces con humor, como en las calaveritas. La tradición no pide olvidar el dolor, sino acompañarlo con memoria y comunidad.",
+      relacionadas: ["que-es-ofrenda", "honrar", "calaveras-literarias"]
+    },
+    {
+      id: "unesco", tema: "origen",
+      pregunta: "¿Por qué la UNESCO lo reconoce como patrimonio?",
+      variantes: ["¿Es Patrimonio de la Humanidad?", "¿Cuándo lo declaró la UNESCO?", "patrimonio cultural inmaterial", "¿Qué dijo la UNESCO del Día de Muertos?"],
+      clave: ["unesco", "patrimonio", "patrimonio cultural inmaterial", "patrimonio de la humanidad"],
+      respuesta: "En **2008** la UNESCO inscribió la «festividad indígena dedicada a los muertos» de México en la **Lista Representativa del Patrimonio Cultural Inmaterial de la Humanidad**. Antes, en 2003, ya la había proclamado Obra Maestra del Patrimonio Oral e Intangible.\n\nSe reconoció porque es una **tradición viva**: se transmite de generación en generación, une a las comunidades y combina raíces indígenas con otras influencias. El reconocimiento no significa que sea igual en todo el país; se valora precisamente su diversidad.",
+      relacionadas: ["origen", "diferencias-regiones", "que-es"]
+    },
+    {
+      id: "xolo", tema: "origen",
+      pregunta: "¿Qué papel tiene el xoloitzcuintle (el perro)?",
+      variantes: ["¿Por qué hay perros en la ofrenda?", "¿Qué es un xoloitzcuintle?", "¿El perro guía a las almas?", "perro sin pelo mexicano", "¿Quién es Dante en Coco?"],
+      clave: ["xoloitzcuintle", "perro en la ofrenda", "perro guia"],
+      respuesta: "El **xoloitzcuintle** es una raza de perro mexicano, sin pelo. En la tradición prehispánica se asocia con el viaje al Mictlán: se creía que un perro **acompañaba y ayudaba al alma** a cruzar un río del inframundo.\n\nPor eso a veces se ponen figuras de perritos en la ofrenda. También aparece en la película *Coco*, donde Dante es un xoloitzcuintle.",
+      relacionadas: ["mictlan", "coco", "ofrenda-mascotas"]
+    },
+
+    /* ====================== LA OFRENDA ====================== */
+    {
+      id: "que-es-ofrenda", tema: "ofrenda",
+      pregunta: "¿Qué es una ofrenda?",
+      variantes: ["¿Qué es un altar de muertos?", "¿Para qué sirve la ofrenda?", "¿Qué se hace con la ofrenda?", "definición de ofrenda", "¿A quién se le pone ofrenda?"],
+      clave: ["que es una ofrenda", "que es la ofrenda", "que es un altar", "para que sirve la ofrenda"],
+      respuesta: "La **ofrenda** (o altar de muertos) es el espacio donde la familia **recibe a sus difuntos** durante estos días. Lleva fotografías, flores, velas, comida, bebida y objetos que a la persona le gustaban.\n\nEs sobre todo un acto de **memoria y cariño**: se prepara con tiempo y se comparte en familia. Cada familia y región la arma a su manera, y no hay una forma única correcta.",
+      relacionadas: ["elementos", "niveles", "armar-ofrenda"]
+    },
+    {
+      id: "elementos", tema: "ofrenda",
+      pregunta: "¿Qué elementos lleva una ofrenda?",
+      variantes: ["¿Qué se pone en la ofrenda?", "¿Qué significa cada elemento de la ofrenda?", "partes de la ofrenda", "¿Qué lleva un altar de muertos?", "lista de cosas para la ofrenda", "elementos de la ofrenda y su significado"],
+      clave: ["elementos de la ofrenda", "que lleva una ofrenda", "que se pone en la ofrenda", "cada elemento", "partes de la ofrenda", "que lleva el altar"],
+      respuesta: "Una ofrenda tradicional suele incluir:\n- **Fotografías** de los difuntos\n- **Flores** (cempasúchil y otras)\n- **Velas o veladoras**\n- **Copal o incienso**\n- **Agua y sal**\n- **Papel picado**\n- **Pan de muerto**\n- **Comida y bebida** favoritas del difunto\n- **Calaveras de azúcar**\n- Objetos personales, juguetes (en altares de niños) y un petate\n\nPregúntame por cualquiera de ellos para conocer su significado.",
+      relacionadas: ["cempasuchil", "velas", "comida-ofrenda"]
+    },
+    {
+      id: "niveles", tema: "ofrenda",
+      pregunta: "¿Qué significan los niveles de la ofrenda?",
+      variantes: ["¿Cuántos niveles tiene una ofrenda?", "¿Por qué la ofrenda tiene escalones?", "ofrenda de dos, tres o siete niveles", "pisos del altar"],
+      clave: ["niveles", "escalones", "pisos", "siete niveles", "tres niveles"],
+      respuesta: "Hay ofrendas de **uno, dos, tres, siete** o más niveles, y el significado depende de la región y la familia. Algunas explicaciones comunes:\n- **Dos niveles:** cielo y tierra.\n- **Tres niveles:** cielo, tierra e inframundo (o, en versiones católicas, cielo, purgatorio y tierra).\n- **Siete niveles:** los pasos o pruebas que el alma debe superar para llegar al descanso.\n\nNo hay una sola respuesta correcta; es una tradición con muchas interpretaciones.",
+      relacionadas: ["elementos", "mictlan", "armar-ofrenda"]
+    },
+    {
+      id: "cuatro-elementos", tema: "ofrenda",
+      pregunta: "¿Qué representan los cuatro elementos en la ofrenda?",
+      variantes: ["tierra, aire, agua y fuego en la ofrenda", "¿Qué representa el fuego en la ofrenda?", "los cuatro elementos de la naturaleza"],
+      clave: ["cuatro elementos", "tierra agua fuego", "agua fuego aire"],
+      respuesta: "Una interpretación muy extendida dice que la ofrenda reúne los **cuatro elementos**:\n- **Tierra:** frutas, comida y semillas.\n- **Aire:** el papel picado, que se mueve con el viento.\n- **Agua:** el vaso de agua para las almas.\n- **Fuego:** las velas.\n\nEs una explicación popular, no una regla universal: en cada comunidad puede variar.",
+      relacionadas: ["papel-picado", "velas", "sal-agua"]
+    },
+    {
+      id: "foto", tema: "ofrenda",
+      pregunta: "¿Por qué se pone la foto del difunto?",
+      variantes: ["¿Para qué sirve la fotografía en la ofrenda?", "¿Dónde se coloca la foto?", "retrato en el altar"],
+      clave: ["la foto", "fotografia", "retrato"],
+      respuesta: "La **fotografía** identifica a quién se recuerda y suele ser el centro de la ofrenda: es una forma de **invitar a la persona a volver** y de tenerla presente con su rostro. Se coloca en un lugar visible, a veces acompañada de sus objetos favoritos o de una vela.",
+      relacionadas: ["elementos", "honrar", "armar-ofrenda"]
+    },
+    {
+      id: "arco", tema: "ofrenda",
+      pregunta: "¿Qué es el arco de flores de la ofrenda?",
+      variantes: ["¿Para qué sirve el arco en el altar?", "¿Qué significa el arco de cempasúchil?", "puerta de flores de la ofrenda"],
+      clave: ["arco", "arco de flores", "puerta"],
+      respuesta: "El **arco de flores** (a veces de carrizo o varas adornadas) se interpreta como una **puerta o entrada** por la que pasan las almas del mundo de los muertos al de los vivos. Suele hacerse con cempasúchil y otras flores. No todas las ofrendas lo llevan.",
+      relacionadas: ["cempasuchil", "niveles", "elementos"]
+    },
+    {
+      id: "ofrenda-ninos", tema: "ofrenda",
+      pregunta: "¿Cómo es la ofrenda para los niños (angelitos)?",
+      variantes: ["¿Qué se pone en la ofrenda de un niño?", "ofrenda infantil", "¿Qué juguetes se ponen en el altar?", "ofrenda para un bebé"],
+      clave: ["ofrenda de ninos", "ofrenda para ninos", "ofrenda infantil", "juguetes"],
+      respuesta: "La ofrenda para los **niños fallecidos** (los *angelitos*) suele ser más colorida y dulce: se ponen **juguetes, dulces, pan, frutas, atole** y flores blancas, como alhelí o nube, además del cempasúchil. Muchas veces se instala antes y se les recibe primero, alrededor del 31 de octubre o el 1 de noviembre.",
+      relacionadas: ["angelitos", "fechas", "elementos"]
+    },
+    {
+      id: "ofrenda-mascotas", tema: "ofrenda",
+      pregunta: "¿Se puede poner ofrenda a las mascotas?",
+      variantes: ["¿Puedo poner ofrenda a mi perro?", "ofrenda para mi gato", "¿Los animales también tienen ofrenda?", "¿Qué se le pone a una mascota que murió?"],
+      clave: ["mascota", "mi perro", "mi gato"],
+      respuesta: "Sí. Hoy muchas familias dedican un lugar a sus **mascotas**, con su foto, su comida o un juguete. Es una práctica más reciente y personal, pero la tradición es **viva**: cada familia decide cómo honrar a quienes quiso.",
+      relacionadas: ["xolo", "elementos", "honrar"]
+    },
+    {
+      id: "animas-solas", tema: "ofrenda",
+      pregunta: "¿Qué son las ánimas solas?",
+      variantes: ["¿Para quién es la vela de las ánimas solas?", "¿Qué se hace por las almas olvidadas?", "ánimas olvidadas"],
+      clave: ["animas solas", "anima sola", "almas olvidadas"],
+      respuesta: "En algunos lugares se acostumbra poner una vela, agua o comida para las **ánimas solas**: las almas de personas que ya nadie recuerda o que no tienen quién les ponga ofrenda. Es una forma de **solidaridad** con quienes no tienen a quién los honre. La costumbre varía según la comunidad.",
+      relacionadas: ["velas", "yucatan", "que-es-ofrenda"]
+    },
+
+    /* ====================== FLORES, COMIDA Y OBJETOS ====================== */
+    {
+      id: "cempasuchil", tema: "elementos",
+      pregunta: "¿Qué es el cempasúchil y por qué se usa?",
+      variantes: ["¿Por qué la flor de muerto es naranja?", "¿Qué significa la flor de cempasúchil?", "¿Cómo se dice cempasúchil en náhuatl?", "flores de la ofrenda", "¿Qué flores se usan en el Día de Muertos?", "camino de pétalos", "¿Cuál es la flor del Día de Muertos?", "¿Qué flor se pone en los altares?", "¿Cuál es la flor de las ofrendas?", "flor naranja de la ofrenda", "¿Por qué se ponen flores amarillas?", "¿Por qué las flores son de color amarillo y naranja?"],
+      clave: ["cempasuchil", "flor de muerto", "flores de muerto", "flor de veinte", "petalos", "tagetes"],
+      respuesta: "El **cempasúchil** (*Tagetes erecta*) es la flor anaranjada y amarilla del Día de Muertos. Su nombre viene del náhuatl y suele traducirse como «flor de veinte pétalos» o «veinte flores». También se le llama «flor de muerto».\n\nSe cree que su color intenso y su aroma **guían a las almas** hacia la ofrenda, por eso se hacen caminos de pétalos desde la calle hasta el altar. Además se usan otras flores, como el alhelí, la nube y la cresta de gallo.",
+      relacionadas: ["arco", "copal", "elementos"]
+    },
+    {
+      id: "copal", tema: "elementos",
+      pregunta: "¿Para qué sirve el copal?",
+      variantes: ["¿Qué es el copal?", "¿Por qué se quema incienso en la ofrenda?", "sahumerio", "humo en el altar"],
+      clave: ["copal", "incienso", "sahumerio", "humo"],
+      respuesta: "El **copal** es una resina aromática de ciertos árboles que se quema como incienso desde la época prehispánica. En la ofrenda se usa en un **sahumerio** o incensario para **limpiar y purificar el espacio** y para que el humo y el aroma ayuden a **guiar a las almas**. Hoy también se usa incienso comercial.",
+      relacionadas: ["cempasuchil", "velas", "otros-objetos"]
+    },
+    {
+      id: "velas", tema: "elementos",
+      pregunta: "¿Qué significan las velas y veladoras?",
+      variantes: ["¿Para qué se ponen velas en la ofrenda?", "¿De qué color deben ser las velas?", "significado de la luz en el altar", "¿Cuántas velas se ponen?"],
+      clave: ["vela", "velas", "luz", "veladora", "fuego"],
+      respuesta: "Las **velas y veladoras** representan la **luz que guía a las almas** de regreso a casa y el elemento fuego. A menudo se pone una por cada difunto, y a veces cuatro en forma de cruz apuntando a los puntos cardinales.\n\nEl color puede tener significado según la región (por ejemplo, blanco para la pureza o morado para el luto). Recuerda usarlas con cuidado, lejos del papel y de las cortinas.",
+      relacionadas: ["cuatro-elementos", "copal", "armar-ofrenda"]
+    },
+    {
+      id: "sal-agua", tema: "elementos",
+      pregunta: "¿Por qué se pone agua y sal en la ofrenda?",
+      variantes: ["¿Para qué es el vaso de agua?", "¿Qué significa la sal en el altar?", "agua para las almas"],
+      clave: ["agua y sal", "vaso de agua", "la sal"],
+      respuesta: "El **agua** se ofrece para que las almas **calmen la sed** después de su largo viaje. La **sal** se asocia con la **purificación** y, según algunas explicaciones, evita que el cuerpo se corrompa durante el camino. Como casi todo en la tradición, hay varias interpretaciones.",
+      relacionadas: ["mictlan", "cuatro-elementos", "elementos"]
+    },
+    {
+      id: "papel-picado", tema: "elementos",
+      pregunta: "¿Qué significa el papel picado?",
+      variantes: ["¿Para qué sirve el papel picado?", "¿Qué es el papel picado?", "banderitas de colores", "¿Por qué el papel picado se mueve?"],
+      clave: ["papel picado", "banderitas", "papel de china"],
+      respuesta: "El **papel picado** son hojas de papel de colores con figuras recortadas. En la ofrenda representa el **aire** y suele asociarse con la **fragilidad de la vida**; su movimiento con el viento también se relaciona con la presencia de las almas. Además de la ofrenda, adorna calles, casas y panteones.",
+      relacionadas: ["cuatro-elementos", "artesanias", "elementos"]
+    },
+    {
+      id: "pan-muerto", tema: "elementos",
+      pregunta: "¿Qué es el pan de muerto y qué significa?",
+      variantes: ["¿Por qué se come pan de muerto?", "¿Qué representan los huesitos del pan?", "origen del pan de muerto", "¿Cómo es el pan de muerto?", "pan de yema", "¿Qué es el pan que se come en noviembre?", "¿Qué pan se come en Día de Muertos?"],
+      clave: ["pan de muerto", "pan de muertos", "huesitos", "pan de yema"],
+      respuesta: "El **pan de muerto** es un pan dulce que se come y se ofrenda en estas fechas. Suele llevar **«huesitos»** de masa en cruz y una bolita al centro, y se cubre con azúcar o ajonjolí. Se interpreta como el cuerpo del difunto: las tiras son los huesos y la bolita representa el cráneo.\n\nSu origen se debate, porque mezcla ideas de ofrendas prehispánicas y del pan europeo. Cambia según la región; en Oaxaca, por ejemplo, es común el **pan de yema**.",
+      relacionadas: ["comida-ofrenda", "calaveras-azucar", "oaxaca"]
+    },
+    {
+      id: "calaveras-azucar", tema: "elementos",
+      pregunta: "¿Qué son las calaveras de azúcar?",
+      variantes: ["¿Por qué se ponen nombres en las calaveritas de azúcar?", "calaveritas de dulce", "¿Para qué sirven las calaveras de azúcar?", "dulces del Día de Muertos"],
+      clave: ["calaveras de azucar", "calaveritas de azucar", "calavera de azucar", "calaveras de dulce", "dulces"],
+      respuesta: "Las **calaveras de azúcar** son figuras de azúcar decoradas con colores, brillos y papel de colores. Se acostumbra escribir un **nombre en la frente**, ya sea de un difunto o de una persona viva, como regalo o broma cariñosa. Se ponen en la ofrenda, se regalan y también se comen. Reflejan la idea de aceptar la muerte con **humor y dulzura**.",
+      relacionadas: ["pan-muerto", "calaveras-literarias", "elementos"]
+    },
+    {
+      id: "comida-ofrenda", tema: "elementos",
+      pregunta: "¿Qué comida se pone en la ofrenda?",
+      variantes: ["¿Qué platillos se ponen en el altar?", "¿Qué bebidas se ponen en la ofrenda?", "¿Los muertos comen la comida de la ofrenda?", "comida favorita del difunto", "¿Se pone mezcal o cerveza?", "calabaza en tacha", "¿Qué se come en el Día de Muertos?", "¿Qué comida típica hay en el Día de Muertos?"],
+      clave: ["comida de la ofrenda", "que comida", "que se come", "comida favorita", "calabaza en tacha", "mole", "tamales", "bebida", "mezcal"],
+      respuesta: "Se pone lo que la persona **disfrutaba en vida**: platillos como **mole, tamales, arroz o frijoles**; fruta (naranja, mandarina, caña, jícama), **calabaza en tacha, pan de muerto, atole y chocolate**. También bebidas, como refresco, cerveza, mezcal o tequila, si le gustaban.\n\nSe cree que las almas aprovechan el **aroma y la esencia** de los alimentos; después, la familia suele compartir la comida. Los platillos cambian mucho de una región a otra.",
+      relacionadas: ["pan-muerto", "otros-objetos", "elementos"]
+    },
+    {
+      id: "otros-objetos", tema: "elementos",
+      pregunta: "¿Qué otros objetos se ponen en el altar?",
+      variantes: ["¿Para qué sirve el petate?", "¿Se ponen objetos personales en la ofrenda?", "cruz y santos en la ofrenda", "¿Qué más se pone en la ofrenda?"],
+      clave: ["petate", "objetos personales", "otros objetos", "cruz", "santos"],
+      respuesta: "Además de lo básico se agregan **objetos personales** (un sombrero, un instrumento, lentes, herramientas), **juguetes** para los niños, un **petate** (tejido de palma) para que las almas descansen, el **sahumerio** con copal y a veces **cruces o imágenes religiosas**.\n\nLa idea es que el difunto se sienta recibido, así que cada ofrenda es muy personal.",
+      relacionadas: ["foto", "elementos", "ofrenda-ninos"]
+    },
+
+    /* ====================== FECHAS Y PANTEÓN ====================== */
+    {
+      id: "fechas", tema: "fechas",
+      pregunta: "¿Cuándo se celebra el Día de Muertos?",
+      variantes: ["¿En qué fecha es el Día de Muertos?", "¿Qué días son?", "¿Cuántos días dura?", "fecha del día de muertos", "¿Es el 1 o el 2 de noviembre?", "¿Qué se hace el 31 de octubre?", "¿Qué día es el Día de Muertos?", "¿Qué día se celebra?", "¿Qué se hace el primero de noviembre?", "¿Qué se hace el 2 de noviembre?"],
+      clave: ["cuando se celebra", "en que fecha", "que dias son", "cuantos dias", "1 de noviembre", "2 de noviembre", "31 de octubre", "fecha del dia de muertos"],
+      respuesta: "Los días principales son el **1 y 2 de noviembre**, aunque en muchos lugares las actividades empiezan desde el **31 de octubre**. Una idea muy común es que el **1 de noviembre** se recibe a los **niños** (angelitos) y el **2 de noviembre** a los **adultos**.\n\nLas fechas y el orden pueden variar según la región y la comunidad.",
+      relacionadas: ["angelitos", "panteon", "todos-santos"]
+    },
+    {
+      id: "angelitos", tema: "fechas",
+      pregunta: "¿Qué es el Día de los Angelitos?",
+      variantes: ["¿Cuándo se recuerda a los niños?", "¿Qué se hace el 1 de noviembre?", "día de los niños muertos"],
+      clave: ["angelitos", "angelito", "dia de los angelitos"],
+      respuesta: "El **Día de los Angelitos** es cuando se recuerda a los **niños fallecidos**. Se celebra sobre todo el **1 de noviembre**, y en algunos lugares empieza la noche del 31 de octubre. Su ofrenda es más colorida y dulce, con juguetes, dulces, fruta y flores blancas. A los adultos se les recuerda después, el 2 de noviembre.",
+      relacionadas: ["ofrenda-ninos", "fechas", "elementos"]
+    },
+    {
+      id: "panteon", tema: "fechas",
+      pregunta: "¿Qué se hace en el panteón?",
+      variantes: ["¿Por qué se visita el cementerio?", "¿Qué se hace en las tumbas?", "velada en el panteón", "visita a las tumbas"],
+      clave: ["panteon", "el cementerio", "las tumbas", "velada", "velacion"],
+      respuesta: "Muchas familias visitan el **panteón** para **limpiar y adornar las tumbas** con flores y velas, y pasar tiempo con sus difuntos; a veces con música, comida y una velada nocturna. En lugares como Mixquic y Janitzio estas veladas son muy conocidas.\n\nEl ambiente suele ser de **respeto y convivencia**, no siempre de fiesta ruidosa; depende de cada lugar.",
+      relacionadas: ["mixquic", "janitzio", "respeto"]
+    },
+
+    /* ====================== TRADICIONES POR REGIÓN ====================== */
+    {
+      id: "diferencias-regiones", tema: "regiones",
+      pregunta: "¿Se celebra igual en todo México?",
+      variantes: ["¿Cambia la tradición según la región?", "diferencias entre estados", "¿Todos los pueblos lo celebran igual?", "¿Los pueblos indígenas lo celebran distinto?"],
+      clave: ["igual en todo mexico", "todo mexico", "segun la region", "diferencias entre"],
+      respuesta: "No: la celebración **cambia mucho** según la región, la comunidad y la familia. En unos lugares es sobre todo una velada silenciosa en el panteón; en otros hay desfiles, música y comparsas. Cambian los platillos, las flores, la forma de la ofrenda y hasta las fechas. Los pueblos indígenas y las comunidades rurales conservan formas propias.",
+      relacionadas: ["donde-ver", "unesco", "oaxaca"]
+    },
+    {
+      id: "donde-ver", tema: "regiones",
+      pregunta: "¿Dónde se celebra de forma más famosa?",
+      variantes: ["¿Qué lugares visitar para el Día de Muertos?", "¿Dónde puedo ver las mejores celebraciones?", "mejores lugares para el día de muertos", "¿En qué estados es más famoso?", "¿Dónde puedo ver ofrendas grandes?", "pueblos famosos por el Día de Muertos", "¿Dónde ir a ver ofrendas?"],
+      clave: ["donde se celebra", "mejores lugares", "lugares para visitar", "mas famoso"],
+      respuesta: "Algunos de los lugares más conocidos son:\n- **Janitzio y Pátzcuaro** (Michoacán)\n- **San Andrés Mixquic** (Ciudad de México)\n- **Oaxaca** y sus pueblos\n- **Yucatán, Campeche y Quintana Roo** (Hanal Pixán)\n- **Huaquechula** (Puebla)\n- **Pomuch** (Campeche)\n- **Aguascalientes** (Festival de Calaveras)\n\nPregúntame por cualquiera. Si visitas alguno, recuerda que son tradiciones vivas de comunidades: se visita con respeto.",
+      relacionadas: ["janitzio", "mixquic", "respeto"]
+    },
+    {
+      id: "janitzio", tema: "regiones",
+      pregunta: "¿Cómo se celebra en Janitzio y Pátzcuaro?",
+      variantes: ["Noche de Muertos en Michoacán", "¿Qué es Janitzio?", "celebración en el lago de Pátzcuaro", "purépechas y día de muertos"],
+      clave: ["janitzio", "patzcuaro", "michoacan", "purepecha", "lago"],
+      respuesta: "**Janitzio** es una isla del **lago de Pátzcuaro**, en **Michoacán**, famosa por su **Noche de Muertos**: las familias purépechas velan en el panteón con velas, flores y comida durante la noche, y se llega a la isla en lancha.\n\nEs una tradición de comunidades **purépechas** (p'urhépecha) que hoy también atrae a muchos visitantes, por lo que conviene comportarse con mucho respeto.",
+      relacionadas: ["panteon", "respeto", "mixquic"]
+    },
+    {
+      id: "mixquic", tema: "regiones",
+      pregunta: "¿Qué pasa en San Andrés Mixquic?",
+      variantes: ["¿Dónde queda Mixquic?", "velación en Mixquic", "Día de Muertos en Tláhuac", "¿Qué es Mixquic?"],
+      clave: ["mixquic", "tlahuac"],
+      respuesta: "**San Andrés Mixquic**, en la alcaldía Tláhuac de la **Ciudad de México**, es famoso por su **velación en el panteón** la noche del **1 al 2 de noviembre**, con miles de velas y flores, y por sus arcos y altares. Conserva un fuerte carácter de pueblo originario y recibe muchos visitantes.",
+      relacionadas: ["panteon", "donde-ver", "cdmx"]
+    },
+    {
+      id: "oaxaca", tema: "regiones",
+      pregunta: "¿Cómo se celebra en Oaxaca?",
+      variantes: ["Día de Muertos en Oaxaca", "comparsas y muerteadas", "tapetes de arena", "¿Qué se come en Oaxaca en Día de Muertos?"],
+      clave: ["oaxaca", "comparsas", "muerteada", "tapetes de arena"],
+      respuesta: "En **Oaxaca** la tradición es muy variada: hay **comparsas** y desfiles con disfraces y música (llamadas *muerteadas* en algunos pueblos), **tapetes de arena** en algunos lugares, ofrendas con **mole, chocolate y pan de yema**, y visitas a panteones iluminados. Cada pueblo y región tiene sus propias costumbres.",
+      relacionadas: ["pan-muerto", "diferencias-regiones", "donde-ver"]
+    },
+    {
+      id: "yucatan", tema: "regiones",
+      pregunta: "¿Qué es el Hanal Pixán en Yucatán?",
+      variantes: ["Día de Muertos en la península de Yucatán", "tradición maya de los muertos", "¿Qué es el mucbipollo?", "Día de Muertos en Mérida", "Día de Muertos en Campeche o Quintana Roo"],
+      clave: ["hanal pixan", "mucbipollo", "pibipollo", "yucatan", "maya"],
+      respuesta: "En la **península de Yucatán** (Yucatán, Campeche y Quintana Roo) se llama **Hanal Pixán**, que en maya significa algo como «comida de las ánimas». Se prepara un platillo central, el **mucbipollo** (o *pibipollo*), un gran tamal cocido bajo tierra, y se colocan altares con velas, flores y alimentos.\n\nEn muchas comunidades se recuerda a los niños, a los adultos y a las ánimas en distintos momentos.",
+      relacionadas: ["animas-solas", "diferencias-regiones", "comida-ofrenda"]
+    },
+    {
+      id: "huaquechula", tema: "regiones",
+      pregunta: "¿Qué son las ofrendas de Huaquechula?",
+      variantes: ["Día de Muertos en Puebla", "ofrendas monumentales", "altares gigantes", "¿Dónde queda Huaquechula?"],
+      clave: ["huaquechula", "ofrendas monumentales", "monumentales", "puebla"],
+      respuesta: "**Huaquechula**, en **Puebla**, es conocido por sus **ofrendas monumentales**: altares enormes y muy elaborados que las familias levantan para quienes **fallecieron en el último año** y que se abren a los visitantes. Son una forma de recibir a las almas «nuevas» y de compartir el duelo con la comunidad.",
+      relacionadas: ["donde-ver", "niveles", "que-es-ofrenda"]
+    },
+    {
+      id: "pomuch", tema: "regiones",
+      pregunta: "¿Qué es la limpieza de huesos de Pomuch?",
+      variantes: ["¿Por qué limpian los huesos en Campeche?", "costumbre de Pomuch", "Día de Muertos en Campeche", "¿Se limpian los restos de los difuntos?"],
+      clave: ["pomuch", "limpieza de huesos", "limpiar huesos", "huesos"],
+      respuesta: "En **Pomuch, Campeche**, existe la costumbre de **limpiar los restos** de los difuntos en el panteón cada año antes de las fechas y colocarlos de nuevo con cuidado, como un acto de cariño y de convivencia con los antepasados. Es una tradición particular de ciertos pueblos; puede sorprender a quien no la conoce, pero se vive con mucho respeto.",
+      relacionadas: ["yucatan", "panteon", "respeto"]
+    },
+    {
+      id: "aguascalientes", tema: "regiones",
+      pregunta: "¿Qué es el Festival de Calaveras de Aguascalientes?",
+      variantes: ["Día de Muertos en Aguascalientes", "festival de calaveras", "¿Por qué Aguascalientes celebra a las calaveras?"],
+      clave: ["aguascalientes", "festival de calaveras"],
+      respuesta: "**Aguascalientes** organiza cada año el **Festival de Calaveras**, con desfiles, exposiciones y actividades culturales. Es la tierra de **José Guadalupe Posada**, el creador de la Calavera Garbancera, por eso las calaveras tienen un papel especial. Las fechas cambian cada año, así que conviene revisar la información oficial.",
+      relacionadas: ["posada", "catrina", "donde-ver"]
+    },
+    {
+      id: "cdmx", tema: "regiones",
+      pregunta: "¿Qué es el desfile de Día de Muertos de la Ciudad de México?",
+      variantes: ["desfile de catrinas en la CDMX", "¿Cuándo empezó el desfile?", "¿Qué tiene que ver James Bond con el Día de Muertos?", "película Spectre y el desfile", "ofrenda del Zócalo"],
+      clave: ["desfile", "spectre", "james bond", "zocalo", "ciudad de mexico", "cdmx"],
+      respuesta: "En la **Ciudad de México** hay un gran **desfile de Día de Muertos**, con carros alegóricos, catrinas y música, que se realiza desde **2016**. Se ha contado ampliamente que se inspiró en una escena de la película de James Bond *Spectre* (2015), que mostraba un desfile imaginario.\n\nEs una creación **reciente**, no una tradición antigua. Además, cada año se instalan ofrendas monumentales en el Zócalo y otros espacios.",
+      relacionadas: ["coco", "mixquic", "diferencias-regiones"]
+    },
+
+    /* ====================== ARTE Y CULTURA POPULAR ====================== */
+    {
+      id: "catrina", tema: "arte",
+      pregunta: "¿Quién creó a La Catrina?",
+      variantes: ["¿Cuál es el origen de la Catrina?", "historia de la Catrina", "¿Qué es la Calavera Garbancera?", "¿Quién le puso el nombre de Catrina?", "¿Quién pintó a La Catrina?", "Diego Rivera y la Catrina", "¿Quién es la calavera elegante con sombrero?", "¿Quién es la señora calavera?"],
+      clave: ["la catrina", "catrina", "calavera garbancera", "garbancera", "diego rivera"],
+      respuesta: "**La Catrina** nació como la **Calavera Garbancera**, un grabado de **José Guadalupe Posada** hecho hacia 1910, que criticaba a quienes presumían un estatus que no tenían y negaban sus raíces indígenas.\n\nDécadas después, **Diego Rivera** la pintó de cuerpo completo en su mural «Sueño de una tarde dominical en la Alameda Central» (1947) y la llamó **Catrina** (*catrín* significa elegante). Con el tiempo se volvió símbolo del Día de Muertos.",
+      relacionadas: ["posada", "maquillaje-catrina", "calaveras-literarias"]
+    },
+    {
+      id: "posada", tema: "arte",
+      pregunta: "¿Quién fue José Guadalupe Posada?",
+      variantes: ["¿Quién fue Posada?", "grabador de calaveras", "biografía de José Guadalupe Posada", "¿Qué hizo Posada?", "¿Quién dibujó las calaveras famosas?", "¿Quién hizo los grabados de calaveras?"],
+      clave: ["posada", "jose guadalupe posada", "grabador", "grabados"],
+      respuesta: "**José Guadalupe Posada** (Aguascalientes, 1852 – Ciudad de México, 1913) fue un grabador mexicano famoso por sus **calaveras**, con las que criticaba con humor a la sociedad y a los políticos de su época. Sus grabados ilustraban periódicos y hojas populares. Creó la **Calavera Garbancera**, que más tarde se conocería como La Catrina.",
+      relacionadas: ["catrina", "aguascalientes", "calaveras-literarias"]
+    },
+    {
+      id: "calaveras-literarias", tema: "arte",
+      pregunta: "¿Qué son las calaveras literarias?",
+      variantes: ["¿Qué es una calaverita?", "¿Para qué sirven las calaveritas?", "versos del Día de Muertos", "origen de las calaveras literarias", "¿Qué es una calavera literaria?"],
+      clave: ["calaveras literarias", "calavera literaria", "calaverita", "calaveritas"],
+      respuesta: "Las **calaveras literarias** son versos humorísticos que hablan de una persona viva como si ya hubiera muerto, **usando la muerte para burlarse con cariño** de sus defectos, costumbres o profesión. Surgieron en periódicos del siglo XIX y hoy se escriben y se leen en escuelas, familias y concursos. Casi siempre riman y cierran con un toque ingenioso.",
+      relacionadas: ["escribir-calaverita", "ejemplo-calaverita", "posada"]
+    },
+    {
+      id: "coco", tema: "arte",
+      pregunta: "¿La película Coco es fiel a la tradición?",
+      variantes: ["¿Coco muestra bien el Día de Muertos?", "película de Pixar sobre el Día de Muertos", "¿Qué elementos reales aparecen en Coco?", "¿Existe el mundo de los muertos como en Coco?"],
+      clave: ["coco", "pixar", "pelicula coco"],
+      respuesta: "La película **Coco** (Pixar, 2017) se inspiró en el Día de Muertos y ayudó a que mucha gente lo conociera. Retoma elementos reales: la ofrenda, el cempasúchil, los alebrijes, el xoloitzcuintle y, sobre todo, el valor de **recordar a los antepasados**.\n\nPero es una historia de **fantasía**: el «mundo de los muertos» con puentes de flores y trámites no es una creencia tradicional, y la idea de que se muere del todo cuando nadie te recuerda es parte de la ficción. Es una buena puerta de entrada, no un documento histórico.",
+      relacionadas: ["xolo", "que-es", "cdmx"]
+    },
+    {
+      id: "artesanias", tema: "arte",
+      pregunta: "¿Qué artesanías se hacen para el Día de Muertos?",
+      variantes: ["¿Qué es la cartonería?", "catrinas de barro", "alebrijes y día de muertos", "artesanías mexicanas de calaveras"],
+      clave: ["artesanias", "carton", "cartoneria", "cartoneria", "alebrijes", "capula"],
+      respuesta: "Hay muchas artesanías ligadas a estas fechas: **papel picado, calaveras y catrinas de barro o cartonería**, calaveras de azúcar y **alebrijes**. La **cartonería** (figuras de papel y engrudo) es muy popular, y también hay catrinas de cerámica, como las de **Capula, Michoacán**. Cada pieza muestra el estilo de su región.",
+      relacionadas: ["papel-picado", "calaveras-azucar", "catrina"]
+    },
+
+    /* ====================== COMPARACIONES Y OTROS PAÍSES ====================== */
+    {
+      id: "halloween", tema: "mundo",
+      pregunta: "¿En qué se diferencia del Halloween?",
+      variantes: ["¿Es lo mismo que Halloween?", "Halloween vs Día de Muertos", "¿Por qué no es Halloween?", "¿Cuál es la diferencia entre Halloween y Día de Muertos?"],
+      clave: ["halloween", "diferencia con halloween", "es lo mismo"],
+      respuesta: "Son tradiciones **distintas**, con orígenes diferentes.\n- **Halloween** suele relacionarse con el Samhain celta y con la víspera de Todos los Santos en el mundo anglosajón; hoy se centra en disfraces, dulces y sustos.\n- **Día de Muertos** tiene raíces mesoamericanas y católicas, y se centra en **recordar y honrar** a los difuntos queridos con ofrendas, no en asustar.\n\nCoinciden en fechas cercanas y en el tema de la muerte, y en algunos lugares se mezclan, pero su sentido es distinto.",
+      relacionadas: ["origen", "otros-paises", "que-es"]
+    },
+    {
+      id: "otros-paises", tema: "mundo",
+      pregunta: "¿Hay tradiciones parecidas en otros países?",
+      variantes: ["¿Otros países celebran a sus muertos?", "Día de Muertos en América Latina", "celebraciones de difuntos en el mundo", "¿Cómo se celebra en otros países?"],
+      clave: ["otros paises", "otro pais", "latinoamerica", "america latina", "en el mundo"],
+      respuesta: "Sí, muchos países recuerdan a sus difuntos por estas fechas, cada uno a su manera:\n- **Guatemala:** barriletes gigantes y fiambre.\n- **Ecuador:** colada morada y guaguas de pan.\n- **Bolivia:** Todos Santos, tantawawas y el Día de las Ñatitas.\n- **Perú, España** y otros países de tradición católica también honran a sus muertos en estos días.\n\nTodos comparten la idea de recordar, aunque la **ofrenda mexicana** tiene rasgos muy propios.",
+      relacionadas: ["guatemala", "ecuador", "bolivia"]
+    },
+    {
+      id: "guatemala", tema: "mundo",
+      pregunta: "¿Cómo se celebra en Guatemala?",
+      variantes: ["barriletes gigantes de Sumpango", "¿Qué es el fiambre?", "Día de Todos los Santos en Guatemala"],
+      clave: ["guatemala", "barrilete", "sumpango", "fiambre"],
+      respuesta: "En **Guatemala**, el **1 de noviembre** (Día de Todos los Santos) se elevan **barriletes gigantes** (papalotes) en lugares como **Sumpango** y **Santiago Sacatepéquez**, y se cree que sirven para comunicarse con los difuntos. También se come **fiambre**, un platillo frío con verduras, embutidos y quesos.",
+      relacionadas: ["otros-paises", "ecuador", "bolivia"]
+    },
+    {
+      id: "ecuador", tema: "mundo",
+      pregunta: "¿Cómo se celebra en Ecuador?",
+      variantes: ["¿Qué es la colada morada?", "guaguas de pan", "Día de los Difuntos en Ecuador"],
+      clave: ["ecuador", "colada morada", "guaguas de pan"],
+      respuesta: "En **Ecuador**, el **2 de noviembre** es el **Día de los Difuntos**. Se prepara **colada morada** (bebida espesa de frutas y harina de maíz morado) y **guaguas de pan** (panes con forma de bebé; *guagua* significa bebé en quechua), y las familias visitan los cementerios.",
+      relacionadas: ["otros-paises", "guatemala", "bolivia"]
+    },
+    {
+      id: "bolivia", tema: "mundo",
+      pregunta: "¿Cómo se celebra en Bolivia?",
+      variantes: ["¿Qué son las ñatitas?", "¿Qué son las tantawawas?", "Todos Santos en Bolivia"],
+      clave: ["bolivia", "natitas", "tantawawas", "tanta wawa"],
+      respuesta: "En **Bolivia**, durante **Todos Santos** (1 y 2 de noviembre) se arma una mesa con **tantawawas** (panes con forma de bebé o de figuras), frutas y comida para recibir a las almas.\n\nPocos días después, en La Paz, se celebra el **Día de las Ñatitas**: las familias adornan y bendicen **cráneos** que conservan en casa como protectores.",
+      relacionadas: ["otros-paises", "ecuador", "guatemala"]
+    },
+
+    /* ====================== TAREAS Y PARTICIPACIÓN ====================== */
+    {
+      id: "armar-ofrenda", tema: "practico",
+      pregunta: "¿Cómo armo una ofrenda paso a paso?",
+      variantes: ["¿Cómo hacer una ofrenda en casa?", "¿Cómo se monta un altar de muertos?", "guía para hacer una ofrenda", "¿Cómo poner una ofrenda en la escuela?", "pasos para armar una ofrenda"],
+      clave: ["armar una ofrenda", "hacer una ofrenda", "como armo", "como poner una ofrenda", "paso a paso", "montar una ofrenda"],
+      respuesta: "Una forma sencilla de armarla:\n1. **Decide a quién honrar** y reúne su foto y algo que le gustaba.\n2. **Elige el lugar** y arma una mesa o niveles con cajas; cúbrelos con tela o papel.\n3. Coloca la **fotografía** en un lugar visible.\n4. Agrega **flores** (cempasúchil) y, si quieres, un camino de pétalos.\n5. Pon **velas** con cuidado y **copal o incienso**.\n6. Coloca **agua, sal, pan de muerto** y la **comida y bebida** favoritas.\n7. Decora con **papel picado** y objetos personales.\n\nNo hay una forma única: lo importante es el significado que tenga para ti y tu familia. Si la haces en la escuela, usa luces LED en lugar de velas.",
+      relacionadas: ["elementos", "niveles", "ofrenda-escuela"]
+    },
+    {
+      id: "escribir-calaverita", tema: "practico",
+      pregunta: "¿Cómo escribo una calaverita literaria?",
+      variantes: ["¿Cómo se hace una calavera literaria?", "ayuda para escribir una calaverita", "¿Cómo componer versos de calaverita?", "tarea de calaveritas", "pasos para escribir una calaverita", "¿Cómo hago una calavera literaria?", "¿Cómo hago una calaverita?"],
+      clave: ["escribir una calaverita", "como escribo una calaverita", "hacer una calaverita", "escribir una calavera", "como hacer una calavera", "como hago una calavera", "como hago una calaverita", "hacer una calavera literaria"],
+      respuesta: "Una forma sencilla de escribirla:\n1. **Elige a la persona** (un amigo, un maestro o tú mismo) y piensa en rasgos divertidos y respetuosos: su carácter, manías o gustos.\n2. Imagina que **ya murió** y que la Muerte «se la llevó» por una de esas razones.\n3. Escribe en **versos con rima**; por ejemplo, cuatro líneas con rima en la segunda y la cuarta.\n4. **Cierra con un remate ingenioso**.\n\nLa burla debe ser **cariñosa, nunca hiriente**. Si quieres ver cómo suena, pídeme un ejemplo.",
+      relacionadas: ["ejemplo-calaverita", "calaveras-literarias", "exposicion"]
+    },
+    {
+      id: "ejemplo-calaverita", tema: "practico",
+      pregunta: "Dame un ejemplo de calaverita literaria",
+      variantes: ["Muéstrame una calaverita", "ejemplo de calavera literaria", "una calaverita de ejemplo", "calaverita para un maestro", "Dame un poema de calavera", "un poema de calaverita", "Dame una calaverita"],
+      clave: ["ejemplo de calaverita", "ejemplo de calavera", "muestrame una calaverita", "una calaverita de ejemplo"],
+      respuesta: "Aquí van dos ejemplos escritos para esta guía:\n\n*Llegó la Calaca flaca*\n*buscando al profe de inglés;*\n*le dijo: «Ven, que te llevo»*\n*y él contestó: «¡Yes, yes, yes!»*\n\n*La Muerte llegó a la escuela*\n*buscando al más dormilón;*\n*lo encontró en la última banca*\n*y le dijo: «¡Presente, campeón!»*\n\nObserva cómo riman la 2.ª y la 4.ª línea y cómo termina con un remate. ¡Ahora intenta escribir la tuya!",
+      relacionadas: ["escribir-calaverita", "calaveras-literarias", "calaveras-azucar"]
+    },
+    {
+      id: "respeto", tema: "practico",
+      pregunta: "¿Cómo comportarme con respeto en una ofrenda o panteón?",
+      variantes: ["¿Qué no se debe hacer en el panteón?", "reglas para visitar una ofrenda", "¿Puedo tomar fotos en el panteón?", "etiqueta en una velación", "¿Cómo visitar Janitzio con respeto?", "¿Qué no debo hacer en el panteón?", "¿Qué no se debe hacer en una ofrenda?"],
+      clave: ["con respeto", "no se debe hacer", "reglas", "tomar fotos", "etiqueta", "comportamiento"],
+      respuesta: "Algunas ideas básicas:\n- **Pide permiso** antes de fotografiar a personas o ofrendas privadas, y no uses flash en las veladas.\n- **No toques ni muevas** objetos de la ofrenda, y no tomes comida sin que te inviten.\n- **Guarda silencio** y habla en voz baja: para muchas familias es un momento íntimo.\n- No te subas a las tumbas ni las uses como escenario.\n- Viste de forma sobria y sigue las indicaciones de la comunidad.\n- No te burles de la tradición ni la uses como simple disfraz.\n\nLa regla de oro: recuerda que estás en un espacio de **duelo y memoria** de otras personas.",
+      relacionadas: ["panteon", "janitzio", "maquillaje-catrina"]
+    },
+    {
+      id: "exposicion", tema: "practico",
+      pregunta: "¿Cómo preparo una exposición o tarea sobre el Día de Muertos?",
+      variantes: ["ideas para una exposición del Día de Muertos", "¿Qué temas incluir en mi tarea?", "estructura para presentar el Día de Muertos", "¿Cómo organizar mi trabajo?", "ideas para mi proyecto"],
+      clave: ["exposicion", "tarea sobre el dia de muertos", "proyecto sobre el dia de muertos", "presentar mi trabajo"],
+      respuesta: "Una estructura posible para una exposición de 5 a 7 minutos:\n1. **¿Qué es y cuándo se celebra?**\n2. **Origen:** raíces prehispánicas y católicas.\n3. **La ofrenda** y el significado de sus elementos.\n4. **Dos tradiciones regionales** (por ejemplo, Janitzio y Hanal Pixán).\n5. **Arte y cultura:** La Catrina y Posada.\n6. **Reconocimiento de la UNESCO** y por qué es una tradición viva.\n7. **Conclusión:** qué significa hoy para tu familia o tu comunidad.\n\nPuedes apoyarte con una mini ofrenda o una calaverita. Cita tus fuentes: tu libro de texto, la UNESCO o la Secretaría de Cultura.",
+      relacionadas: ["unesco", "elementos", "ofrenda-escuela"]
+    },
+    {
+      id: "ofrenda-escuela", tema: "practico",
+      pregunta: "¿Qué ideas hay para un concurso de ofrendas en la escuela?",
+      variantes: ["ideas para una ofrenda escolar", "concurso de altares", "¿Cómo hacer una ofrenda creativa?", "ofrenda para la escuela con material reciclado"],
+      clave: ["concurso de ofrendas", "ofrenda escolar", "ofrenda en la escuela", "ofrenda creativa", "reciclado"],
+      respuesta: "Algunas ideas:\n- Dedicarla a un **personaje histórico**, a un oficio o a un miembro querido de la comunidad escolar.\n- Usar **materiales reciclados**: cajas para los niveles, papel picado hecho a mano, flores de papel.\n- Incluir una **explicación escrita** del significado de cada elemento.\n- Sumar **calaveritas literarias** de los compañeros.\n- Usar **luces LED** en lugar de velas, por seguridad.\n\nConfirma con tu maestra o maestro las reglas del concurso.",
+      relacionadas: ["armar-ofrenda", "exposicion", "calaveras-literarias"]
+    },
+    {
+      id: "honrar", tema: "practico",
+      pregunta: "¿Cómo puedo recordar a un ser querido que ya no está?",
+      variantes: ["¿Cómo honrar a mi abuelo?", "¿Qué puedo hacer para recordar a alguien que murió?", "ideas para un homenaje familiar", "¿Cómo hago una ofrenda para mi abuela?"],
+      clave: ["recordar a un ser querido", "honrar a", "homenaje", "ser querido", "mi abuelo", "mi abuela"],
+      respuesta: "Hay muchas formas de recordar a alguien que ya no está: poner una **ofrenda sencilla** con su foto, una vela y algo que le gustaba; **cocinar su platillo favorito**; escuchar su música; **contar sus historias** en familia; visitar su tumba o escribirle una carta.\n\nSi extrañas mucho a alguien, es normal sentir tristeza. Hablar con tu familia o con una persona de confianza ayuda.",
+      relacionadas: ["armar-ofrenda", "porque-se-celebra", "foto"]
+    },
+    {
+      id: "maquillaje-catrina", tema: "practico",
+      pregunta: "¿Puedo maquillarme de Catrina?",
+      variantes: ["¿Es una falta de respeto disfrazarse de Catrina?", "¿Puedo pintarme la cara de calavera?", "maquillaje de calavera", "¿Se puede usar disfraz de catrina?", "¿Es de mala educación pintarse de calavera?", "¿Es una falta de respeto maquillarse de calavera?"],
+      clave: ["maquillarme de catrina", "disfrazarme de catrina", "disfraz de catrina", "falta de respeto", "pintarme la cara"],
+      respuesta: "Muchas personas se maquillan de **Catrina o Catrín** en estas fechas, y en general es una forma de participar y celebrar. Para hacerlo con respeto:\n- Conoce el **significado** de la Catrina y de la tradición.\n- Evita usarlo como **burla** o como disfraz sin contexto.\n- No lo hagas en lugares donde se realiza una **ceremonia solemne** sin permiso.\n\nSi lo haces en la escuela, puedes aprovechar para explicar a tus compañeros qué representa.",
+      relacionadas: ["catrina", "respeto", "halloween"]
+    },
+    {
+      id: "vocabulario", tema: "practico",
+      pregunta: "¿Qué significan las palabras propias del Día de Muertos?",
+      variantes: ["glosario del Día de Muertos", "vocabulario de la ofrenda", "¿Qué es un panteón?", "¿Qué significa panteón?", "¿Qué significa ánimas?", "¿Qué es una calaca?", "¿Qué significa calaca?", "diccionario de día de muertos"],
+      clave: ["glosario", "vocabulario", "que es un panteon", "que significa animas", "que es una calaca", "diccionario"],
+      respuesta: "Un mini glosario:\n- **Ánimas:** almas de los difuntos.\n- **Ofrenda:** altar con que se recibe a los difuntos.\n- **Panteón:** cementerio.\n- **Calaca:** forma popular de llamar a la Muerte o a una calavera.\n- **Calaverita:** verso humorístico sobre alguien, como si hubiera muerto.\n- **Velación:** vigilia nocturna en el panteón.\n- **Sahumerio:** recipiente donde se quema copal o incienso.\n- **Petate:** tejido de palma que sirve de base o cama.\n- **Sincretismo:** mezcla de tradiciones de distintas culturas.",
+      relacionadas: ["elementos", "calaveras-literarias", "sincretismo"]
+    }
+  ],
+
+  /* ====================== INTENCIONES (saludos, ayuda, casos sensibles) ====================== */
+  intenciones: [
+    {
+      id: "crisis",
+      patrones: [
+        "quiero (morir|morirme|matarme)", "(me )?quiero (morir|matar)", "suicid",
+        "no quiero (vivir|seguir viviendo)", "(quitarme|quitarse) la vida",
+        "(acabar|terminar) con mi vida", "(hacerme|hacerse) dano", "lastimarme",
+        "autolesion", "ojala (me )?muriera", "mejor (estar )?(muerto|muerta)"
+      ],
+      respuesta: "Gracias por contármelo. Lo que sientes importa, y **no tienes que pasar por esto solo o sola**.\n\nSoy una guía con respuestas preparadas y no puedo acompañarte como lo haría una persona. Por favor, habla **hoy** con un adulto de confianza (familia, maestra o maestro, orientación escolar) y cuéntale cómo te sientes.\n\nTambién puedes llamar a la **Línea de la Vida: 800 911 2000**, gratuita y con atención las 24 horas, todos los días. Si estás en peligro o piensas hacerte daño en este momento, llama al **911**.",
+      relacionadas: []
+    },
+    {
+      id: "duelo",
+      patrones: [
+        "(murio|fallecio|murieron|fallecieron) (mi|mis)\\b",
+        "(perdi|extrano|extranamos) a (mi|mis)\\b",
+        "acaba de (morir|fallecer)"
+      ],
+      respuesta: "Lamento mucho esa pérdida. Extrañar a alguien que quisimos duele, y es normal sentir tristeza, enojo o confusión.\n\nEl Día de Muertos nace justamente de la idea de que **seguimos en contacto con quienes ya no están** a través del recuerdo. Puedes poner una pequeña ofrenda con su foto, una vela y algo que le gustaba, o contar sus historias en familia.\n\nHablar con tu familia o con alguien de confianza ayuda. Si el dolor se vuelve muy fuerte, la **Línea de la Vida (800 911 2000)** atiende gratis las 24 horas.",
+      relacionadas: ["honrar", "armar-ofrenda", "porque-se-celebra"]
+    },
+    {
+      id: "saludo",
+      palabras: ["hola", "holi", "holis", "buenas", "buenos", "buen", "dias", "dia", "tardes", "noches", "hey", "saludos", "tal", "ola", "hello", "hi", "estas", "como"],
+      respuesta: "¡Hola! Soy la **Guía de Ofrenda**. Puedes preguntarme sobre el origen del Día de Muertos, la ofrenda, las tradiciones de cada región, La Catrina, las calaveritas y más. También puedes elegir un tema con el botón **Temas**.",
+      relacionadas: ["que-es", "elementos", "catrina"]
+    },
+    {
+      id: "gracias",
+      palabras: ["gracias", "muchas", "mil", "amable", "genial", "excelente", "perfecto", "vale", "ok", "okey", "listo", "super", "chido", "padre", "buena", "buenisima", "muy", "bien"],
+      respuesta: "¡Con gusto! Si quieres seguir explorando, aquí tienes algunas ideas.",
+      relacionadas: ["halloween", "catrina", "escribir-calaverita"]
+    },
+    {
+      id: "despedida",
+      palabras: ["adios", "bye", "chao", "chau", "hasta", "luego", "pronto", "nos", "vemos", "manana", "despido"],
+      respuesta: "¡Hasta pronto! Gracias por interesarte en esta tradición. Cuando quieras, aquí estaré. 🌼",
+      relacionadas: []
+    },
+    {
+      id: "quien-eres",
+      patrones: [
+        "quien eres", "que eres", "que puedes hacer", "que sabes", "como funcionas",
+        "eres (una |un )?(ia|robot|bot|persona|humano|humana)", "inteligencia artificial", "que haces"
+      ],
+      respuesta: "Soy la **Guía de Ofrenda**, un asistente con respuestas preparadas sobre el Día de Muertos. **No uso inteligencia artificial**: busco tu pregunta en una base de preguntas y respuestas hecha de antemano, así que puedo no entenderte bien o no tener la respuesta.\n\nPrueba con palabras clave (por ejemplo, «cempasúchil», «Catrina» u «Oaxaca») o elige un tema con el botón **Temas**.",
+      relacionadas: ["que-es", "elementos", "catrina"]
+    },
+    {
+      id: "temas",
+      palabras: ["temas", "tema", "menu", "opciones", "categorias", "indice", "ayuda", "ayudame", "help"],
+      patrones: ["de que (puedes )?hablar", "que temas"],
+      accion: "temas",
+      respuesta: "Estos son los temas disponibles:",
+      relacionadas: []
+    }
+  ],
+
+  // Mensajes cuando no se encuentra una respuesta
+  sinRespuesta: "No encontré una respuesta para eso en mi base. Prueba con otras palabras (por ejemplo, el nombre de una flor, un lugar o un personaje) o elige un tema.",
+  sinRespuestaConSugerencias: "No estoy seguro de haberte entendido. ¿Alguna de estas preguntas se acerca a lo que buscas?"
+};
+
+if (typeof module !== "undefined" && module.exports) { module.exports = CONOCIMIENTO; }
+
+</script>
+<script>
+/*
+ * MOTOR DE BÚSQUEDA · Guía de Ofrenda (versión sin IA)
+ *
+ * No aprende ni genera texto: compara tu pregunta con la base de conocimiento
+ * (conocimiento.js) usando técnicas clásicas de búsqueda:
+ *   1. Normaliza el texto (minúsculas, sin acentos ni signos).
+ *   2. Reduce cada palabra a su raíz aproximada ("ofrendas" -> "ofren").
+ *   3. Aplica sinónimos y corrige faltas de ortografía de una letra.
+ *   4. Puntúa cada entrada con BM25 y premia las frases características.
+ *   5. Si la puntuación es baja, no inventa nada: sugiere preguntas parecidas.
+ */
+var Motor = (function () {
+  "use strict";
+
+  var STOP = ("a al algo ante aqui asi aun cada como con contra cual cuales cuanto cuantos de del desde dos " +
+    "el ella ellos en entre era eres es esa ese eso esta estas este esto estos fue ha han hay la las le les lo " +
+    "los me mi mis mucho muy no nos nosotros o para pero poco por porque pues que quien quienes se ser si sin " +
+    "sobre son su sus te tiene tienen tu tus un una uno unos y ya yo puedo puede pueden podria podrias quiero " +
+    "quisiera saber dime decir hablame cuentame explicame explica favor ayudame dame dar significa significan " +
+    "significado representa representan tambien tan tanto mas menos ver vez").split(" ");
+  var STOPSET = {};
+  STOP.forEach(function (w) { STOPSET[w] = true; });
+
+  var CHARLA = {};
+  ("hola buenas buenos tardes noches oye porfa porfavor necesito necesitamos gustaria duda dudas pregunta " +
+   "preguntas quisiera maestra maestro profe profesora profesor amigo amiga bot guia " +
+   "ayuda ayudas ayudar ayudame ayudan tarea tareas").split(" ")
+    .forEach(function (w) { CHARLA[w] = true; });
+
+  var SUFIJOS = ["aciones", "amiento", "acion", "amos", "aron", "ando", "iendo", "ado", "ido",
+    "ar", "er", "ir", "an", "en", "as", "es", "os", "a", "e", "o", "s"];
+
+  var K1 = 1.2, B = 0.4;
+  var BONO_FRASE = 3.5;      // la pregunta contiene una frase característica de la entrada
+  var BONO_EXACTO = 12;      // la pregunta coincide con la pregunta o una variante de la entrada
+  var MIN_PUNTAJE = 2.2;     // por debajo de esto el bot prefiere decir "no sé"
+  var IDF_MIN = 1.6;         // al menos una palabra clave con valor temático suficiente
+  var COBERTURA_MIN = 0.6;    // proporción mínima de la pregunta que debe quedar explicada
+  var IDF_DESCONOCIDO = 2.5;  // peso de las palabras que la base no conoce (cuentan como "no entendidas")
+  var PESO_FUERTE = 3;       // pregunta, variantes y claves pesan 3 veces más que la respuesta
+
+  function normalizar(texto) {
+    return String(texto || "")
+      .toLowerCase()
+      .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+      .replace(/[^a-z0-9]+/g, " ")
+      .trim();
+  }
+
+  function raiz(palabra) {
+    var w = palabra;
+    if (/^\d+$/.test(w)) return w;
+    for (var pasada = 0; pasada < 2; pasada++) {
+      if (w.length <= 3) break;
+      if (pasada === 1 && w.length <= 5) break;
+      for (var i = 0; i < SUFIJOS.length; i++) {
+        var suf = SUFIJOS[i];
+        var minimo = (suf === "aciones" || suf === "acion" || suf === "amiento") ? 4 : 3;
+        if (w.length - suf.length >= minimo && w.slice(-suf.length) === suf) {
+          w = w.slice(0, -suf.length);
+          break;
+        }
+      }
+    }
+    return w.slice(0, 5);
+  }
+
+  function distanciaMax1(a, b) {
+    // ¿a y b difieren en una sola letra (cambio, falta, sobra o dos letras intercambiadas)?
+    if (a === b) return true;
+    var la = a.length, lb = b.length;
+    if (Math.abs(la - lb) > 1) return false;
+    var i = 0;
+    while (i < la && i < lb && a[i] === b[i]) i++;
+    if (la === lb) {
+      if (a.slice(i + 1) === b.slice(i + 1)) return true;
+      return a[i] === b[i + 1] && a[i + 1] === b[i] && a.slice(i + 2) === b.slice(i + 2);
+    }
+    return la > lb ? a.slice(i + 1) === b.slice(i) : b.slice(i + 1) === a.slice(i);
+  }
+
+  function crear(kb) {
+    var sinonimos = {};
+    Object.keys(kb.sinonimos || {}).forEach(function (k) { sinonimos[normalizar(k)] = normalizar(kb.sinonimos[k]); });
+    var frases = (kb.frases || []).map(function (par) { return [new RegExp("\\b(" + par[0] + ")\\b", "g"), par[1]]; });
+
+    function limpiar(texto) {
+      var t = normalizar(texto);
+      frases.forEach(function (par) { t = t.replace(par[0], par[1]); });
+      return t;
+    }
+
+    /* ---------- Vocabulario conocido (para corregir faltas de ortografía) ---------- */
+    var frecuencia = {};
+    function registrarPalabras(texto, peso) {
+      limpiar(texto).split(" ").forEach(function (w) {
+        if (w.length >= 5) frecuencia[w] = (frecuencia[w] || 0) + peso;   // se conocen desde 5 letras; se corrigen desde 6
+      });
+    }
+    kb.entradas.forEach(function (e) {
+      registrarPalabras(e.pregunta, 3);
+      (e.variantes || []).forEach(function (v) { registrarPalabras(v, 3); });
+      (e.clave || []).forEach(function (c) { registrarPalabras(c, 3); });
+      registrarPalabras(e.respuesta, 1);
+    });
+    Object.keys(sinonimos).forEach(function (k) { registrarPalabras(k, 3); registrarPalabras(sinonimos[k], 3); });
+    var palabrasConocidas = Object.keys(frecuencia);
+
+    function corregirPalabra(w) {
+      if (w.length < 6 || STOPSET[w] || frecuencia[w] || /\d/.test(w)) return w;
+      var mejor = null;
+      for (var i = 0; i < palabrasConocidas.length; i++) {
+        var v = palabrasConocidas[i];
+        if (distanciaMax1(w, v) && (mejor === null || frecuencia[v] > frecuencia[mejor])) mejor = v;
+      }
+      return mejor || w;
+    }
+
+    /* ---------- Preparación del texto ---------- */
+    function preparar(texto, corregir) {
+      var salida = [];
+      limpiar(texto).split(" ").forEach(function (w) {
+        if (!w) return;
+        if (corregir) w = corregirPalabra(w);
+        (sinonimos[w] || w).split(" ").forEach(function (x) { if (x) salida.push(x); });
+      });
+      return salida;
+    }
+    function raices(texto, corregir) {
+      return preparar(texto, corregir).filter(function (w) { return !STOPSET[w] && !CHARLA[w]; }).map(raiz);
+    }
+    function secuencia(texto, corregir) {
+      return preparar(texto, corregir).map(function (w) { return STOPSET[w] ? w : raiz(w); }).join(" ");
+    }
+
+    function sinPlural(w) { return w.length > 4 && w.charAt(w.length - 1) === "s" ? w.slice(0, -1) : w; }
+
+    /* ---------- Índice ---------- */
+    var porId = {};
+    var docs = kb.entradas.map(function (e) {
+      porId[e.id] = e;
+      var tf = {}, fuertes = {}, largo = 0;
+      function sumar(texto, peso, esFuerte) {
+        raices(texto, false).forEach(function (r) {
+          tf[r] = (tf[r] || 0) + peso;
+          largo += peso;
+          if (esFuerte) fuertes[r] = true;
+        });
+      }
+      sumar(e.pregunta, PESO_FUERTE, true);
+      (e.variantes || []).forEach(function (v) { sumar(v, PESO_FUERTE, true); });
+      (e.clave || []).forEach(function (c) { sumar(c, PESO_FUERTE, true); });
+      sumar(e.respuesta, 1, false);
+      return {
+        entrada: e, tf: tf, fuertes: fuertes, largo: largo,
+        exactos: [e.pregunta].concat(e.variantes || []).map(function (t) { return secuencia(t, false); }),
+        frases: (e.clave || []).filter(function (c) { return normalizar(c).indexOf(" ") !== -1; })
+          .map(function (c) { return secuencia(c, false); }),
+        palabrasClave: (e.clave || []).filter(function (c) {
+          var n = normalizar(c);
+          return n.indexOf(" ") === -1 && n.length > 4;
+        }).map(function (c) { return sinPlural(preparar(c, false).join(" ")); })
+      };
+    });
+
+    var N = docs.length;
+    var promedio = docs.reduce(function (acc, d) { return acc + d.largo; }, 0) / N;
+    var df = {}, dfFuerte = {};
+    docs.forEach(function (d) {
+      Object.keys(d.tf).forEach(function (r) { df[r] = (df[r] || 0) + 1; });
+      Object.keys(d.fuertes).forEach(function (r) { dfFuerte[r] = (dfFuerte[r] || 0) + 1; });
+    });
+
+    function idfDe(n) { return Math.log(1 + (N - n + 0.5) / (n + 0.5)); }
+    function idf(r) { return idfDe(df[r] || 0); }
+    function idfFuerte(r) { return idfDe(dfFuerte[r] || 0); }
+    // Cuánto "pesa" una palabra de la pregunta al decidir si fue entendida
+    function pesoTema(r) {
+      if (dfFuerte[r]) return idfFuerte(r);
+      if (df[r]) return idf(r);
+      return IDF_DESCONOCIDO;
+    }
+
+    /* ---------- Búsqueda ---------- */
+    function buscar(texto) {
+      var terminos = [];
+      raices(texto, true).forEach(function (r) {
+        if (terminos.indexOf(r) === -1) terminos.push(r);
+      });
+      if (!terminos.length) return [];
+
+      var consulta = secuencia(texto, true);
+      var marco = " " + consulta + " ";
+      var palabrasConsulta = {};
+      preparar(texto, true).forEach(function (w) { palabrasConsulta[sinPlural(w)] = true; });
+      var masaTotal = 0;
+      terminos.forEach(function (r) { if (!/^\d+$/.test(r)) masaTotal += pesoTema(r); });
+
+      var resultados = docs.map(function (d) {
+        var puntaje = 0, coincidenciasFuertes = 0, masaFuerte = 0, mejorIdf = 0;
+        terminos.forEach(function (r) {
+          var tf = d.tf[r];
+          if (!tf) return;
+          var peso = idf(r);
+          if (d.fuertes[r]) {
+            coincidenciasFuertes++;
+            if (!/^\d+$/.test(r)) {          // los números solos no cuentan como tema
+              var pf = idfFuerte(r);
+              masaFuerte += pf;
+              if (pf > mejorIdf) mejorIdf = pf;
+            }
+          }
+          puntaje += peso * (tf * (K1 + 1)) / (tf + K1 * (1 - B + B * d.largo / promedio));
+        });
+        var porFrase = false;
+        d.frases.forEach(function (f) {
+          if (marco.indexOf(" " + f + " ") !== -1) { puntaje += BONO_FRASE; porFrase = true; }
+        });
+        d.palabrasClave.forEach(function (w) {
+          if (palabrasConsulta[w]) { puntaje += BONO_FRASE; porFrase = true; }
+        });
+        if (d.exactos.indexOf(consulta) !== -1) { puntaje += BONO_EXACTO; porFrase = true; }
+        return {
+          entrada: d.entrada, puntaje: puntaje, fuertes: coincidenciasFuertes, porFrase: porFrase,
+          mejorIdf: mejorIdf, cobertura: masaTotal ? masaFuerte / masaTotal : 0
+        };
+      }).filter(function (r) { return r.puntaje > 0; });
+
+      resultados.sort(function (x, y) { return y.puntaje - x.puntaje; });
+      return resultados;
+    }
+
+    /* ---------- Intenciones ---------- */
+    var intenciones = (kb.intenciones || []).map(function (i) {
+      var set = null;
+      if (i.palabras) { set = {}; i.palabras.forEach(function (p) { set[normalizar(p)] = true; }); }
+      return {
+        def: i, set: set,
+        regex: (i.patrones || []).map(function (p) { return new RegExp(p); })
+      };
+    });
+
+    function detectarIntencion(q) {
+      var palabras = q.split(" ").filter(Boolean);
+      var utiles = palabras.filter(function (w) { return !STOPSET[w]; });
+      for (var k = 0; k < intenciones.length; k++) {
+        var it = intenciones[k];
+        for (var j = 0; j < it.regex.length; j++) {
+          if (it.regex[j].test(q)) return it.def;
+        }
+        if (it.set && utiles.length > 0 && utiles.every(function (w) { return it.set[w]; })) return it.def;
+      }
+      return null;
+    }
+
+    /* ---------- Respuesta pública ---------- */
+    function chipsDe(ids, excluir) {
+      return (ids || []).filter(function (id) { return porId[id] && id !== excluir; })
+        .map(function (id) { return { id: id, pregunta: porId[id].pregunta }; });
+    }
+
+    function deEntrada(e, extra) {
+      var chips = chipsDe(e.relacionadas, e.id);
+      if (extra && !chips.some(function (c) { return c.id === extra.id; }) && extra.id !== e.id) {
+        chips.push({ id: extra.id, pregunta: extra.pregunta });
+      }
+      return { tipo: "respuesta", id: e.id, texto: e.respuesta, chips: chips.slice(0, 4), etiqueta: "Te puede interesar:" };
+    }
+
+    function responder(texto) {
+      var q = normalizar(texto);
+      if (!q) return { tipo: "vacio" };
+
+      var it = detectarIntencion(q);
+      if (it) {
+        return {
+          tipo: "intencion", id: it.id, accion: it.accion || null, texto: it.respuesta,
+          chips: chipsDe(it.relacionadas), etiqueta: "Puedes probar con:"
+        };
+      }
+
+      var res = buscar(q);
+      var mejor = res[0];
+      var segundoPuntaje = res[1] ? res[1].puntaje : 0;
+      var victoriaClara = mejor && mejor.puntaje >= 6 && mejor.puntaje >= segundoPuntaje * 1.5 &&
+        mejor.fuertes >= 2 && mejor.mejorIdf >= IDF_MIN && mejor.cobertura >= 0.4;
+      var confiable = mejor && mejor.puntaje >= MIN_PUNTAJE && mejor.fuertes >= 1 &&
+        (mejor.porFrase || victoriaClara || (mejor.mejorIdf >= IDF_MIN && mejor.cobertura >= COBERTURA_MIN));
+      if (confiable) {
+        var segundo = res[1];
+        var cercano = segundo && segundo.fuertes >= 1 && segundo.puntaje >= mejor.puntaje * 0.8 ? segundo.entrada : null;
+        return deEntrada(mejor.entrada, cercano);
+      }
+
+      var sugeridas = res.filter(function (r) { return r.fuertes >= 1; }).slice(0, 3);
+      if (sugeridas.length) {
+        return {
+          tipo: "sugerencias", texto: kb.sinRespuestaConSugerencias,
+          chips: sugeridas.map(function (r) { return { id: r.entrada.id, pregunta: r.entrada.pregunta }; }),
+          etiqueta: ""
+        };
+      }
+      return {
+        tipo: "nada", texto: kb.sinRespuesta,
+        chips: kb.temas.map(function (t) { return { tema: t.id, pregunta: t.nombre }; }),
+        etiqueta: ""
+      };
+    }
+
+    function respuestaPorId(id) {
+      var e = porId[id];
+      return e ? deEntrada(e) : { tipo: "vacio" };
+    }
+
+    function preguntasDeTema(idTema) {
+      return kb.entradas.filter(function (e) { return e.tema === idTema; })
+        .map(function (e) { return { id: e.id, pregunta: e.pregunta }; });
+    }
+
+    return {
+      responder: responder,
+      respuestaPorId: respuestaPorId,
+      preguntasDeTema: preguntasDeTema,
+      buscar: function (t) { return buscar(t); },
+      temas: kb.temas,
+      sugerencias: chipsDe(kb.sugerencias),
+      PREGUNTA: function (id) { return porId[id] ? porId[id].pregunta : ""; }
+    };
+  }
+
+  return { crear: crear, normalizar: normalizar, raiz: raiz, MIN_PUNTAJE: MIN_PUNTAJE };
+})();
+
+if (typeof module !== "undefined" && module.exports) { module.exports = Motor; }
+
+</script>
+<script>
+/* Interfaz del chat · Guía de Ofrenda (versión sin IA). Necesita conocimiento.js y motor.js */
+(function () {
+  "use strict";
+
+  var motor = Motor.crear(CONOCIMIENTO);
+
+  var $ = function (id) { return document.getElementById(id); };
+  var logEl = $("log"), thread = $("thread"), hero = $("hero");
+  var input = $("input"), sendBtn = $("send"), resetBtn = $("reset"), temasBtn = $("btn-temas");
+
+  /* ---------- Banner de papel picado ---------- */
+  (function () {
+    var html = "";
+    for (var i = 0; i < 48; i++) {
+      html += '<svg class="flag" style="--i:' + i + '" viewBox="0 0 64 80" aria-hidden="true"><use href="#papel"></use></svg>';
+    }
+    $("banner").innerHTML = html;
+  })();
+
+  /* ---------- Markdown mínimo y seguro ---------- */
+  function esc(s) { return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
+  function inline(s) {
+    s = esc(s);
+    s = s.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
+    s = s.replace(/(^|[^*])\*([^*\s][^*]*)\*/g, "$1<em>$2</em>");
+    return s;
+  }
+  function md(text) {
+    var lines = text.replace(/\r/g, "").split("\n");
+    var html = "", list = null, para = [], m;
+    function flushPara() { if (para.length) { html += "<p>" + inline(para.join("\n")).replace(/\n/g, "<br>") + "</p>"; para = []; } }
+    function closeList() { if (list) { html += "</" + list + ">"; list = null; } }
+    lines.forEach(function (raw) {
+      var line = raw.replace(/\s+$/, "");
+      if (!line.trim()) { flushPara(); closeList(); return; }
+      if ((m = line.match(/^\s*[-*•]\s+(.*)$/))) {
+        flushPara();
+        if (list !== "ul") { closeList(); html += "<ul>"; list = "ul"; }
+        html += "<li>" + inline(m[1]) + "</li>";
+        return;
+      }
+      if ((m = line.match(/^\s*\d+[.)]\s+(.*)$/))) {
+        flushPara();
+        if (list !== "ol") { closeList(); html += "<ol>"; list = "ol"; }
+        html += "<li>" + inline(m[1]) + "</li>";
+        return;
+      }
+      closeList();
+      para.push(line.trim());
+    });
+    flushPara(); closeList();
+    return html;
+  }
+
+  /* ---------- Desplazamiento ---------- */
+  function scrollDown() { logEl.scrollTop = logEl.scrollHeight; }
+  function scrollTo(el) {
+    var top = el.getBoundingClientRect().top - logEl.getBoundingClientRect().top + logEl.scrollTop - 8;
+    logEl.scrollTop = Math.max(0, top);
+  }
+  // Si la respuesta es larga, muestra el inicio de la pregunta; si es corta, baja hasta el final
+  function mostrar(userEl, guideEl) {
+    var altura = guideEl.offsetHeight + (userEl ? userEl.offsetHeight : 0);
+    if (userEl && altura > logEl.clientHeight - 24) scrollTo(userEl);
+    else if (!userEl && guideEl.offsetHeight > logEl.clientHeight - 24) scrollTo(guideEl);
+    else scrollDown();
+  }
+
+  /* ---------- Elementos de la conversación ---------- */
+  function crearChip(texto, clase, alClic) {
+    var b = document.createElement("button");
+    b.type = "button";
+    b.className = "chip" + (clase ? " " + clase : "");
+    b.textContent = texto;
+    b.addEventListener("click", alClic);
+    return b;
+  }
+  function chipDe(item) {
+    if (item.tema) return crearChip(item.pregunta, "tema", function () { mostrarTema(item.tema); });
+    return crearChip(item.pregunta, "", function () { preguntar(item.pregunta, item.id); });
+  }
+
+  function agregarUsuario(texto) {
+    var wrap = document.createElement("div");
+    wrap.className = "msg user";
+    var bubble = document.createElement("div");
+    bubble.className = "bubble";
+    bubble.textContent = texto;
+    wrap.appendChild(bubble);
+    thread.appendChild(wrap);
+    return wrap;
+  }
+
+  function agregarGuia(html, chips, etiqueta, userEl) {
+    var wrap = document.createElement("div");
+    wrap.className = "msg guide";
+    var body = document.createElement("div");
+    body.className = "text";
+    body.innerHTML = html;
+    wrap.appendChild(body);
+
+    if (chips && chips.length) {
+      if (etiqueta) {
+        var nota = document.createElement("p");
+        nota.className = "note";
+        nota.textContent = etiqueta;
+        wrap.appendChild(nota);
+      }
+      var caja = document.createElement("div");
+      caja.className = "followups";
+      chips.forEach(function (c) { caja.appendChild(chipDe(c)); });
+      wrap.appendChild(caja);
+    }
+    thread.appendChild(wrap);
+    mostrar(userEl, wrap);
+    return wrap;
+  }
+
+  function mostrarConversacion(hay) {
+    hero.hidden = hay;
+    resetBtn.hidden = !hay;
+  }
+
+  /* ---------- Acciones ---------- */
+  function preguntar(texto, id) {
+    texto = (texto || "").trim();
+    if (!texto) return;
+    mostrarConversacion(true);
+    var u = agregarUsuario(texto);
+    var r = id ? motor.respuestaPorId(id) : motor.responder(texto);
+    if (r.tipo === "vacio") return;
+    if (r.accion === "temas") {
+      agregarGuia(md(r.texto), motor.temas.map(function (t) { return { tema: t.id, pregunta: t.nombre }; }), "", u);
+      return;
+    }
+    agregarGuia(md(r.texto), r.chips, r.etiqueta, u);
+  }
+
+  function mostrarTemas() {
+    mostrarConversacion(true);
+    agregarGuia(md("Elige un tema para ver sus preguntas:"),
+      motor.temas.map(function (t) { return { tema: t.id, pregunta: t.nombre }; }), "", null);
+  }
+
+  function mostrarTema(id) {
+    var tema = motor.temas.filter(function (t) { return t.id === id; })[0];
+    if (!tema) return;
+    mostrarConversacion(true);
+    var u = agregarUsuario(tema.nombre);
+    agregarGuia(md("Preguntas sobre **" + tema.nombre + "**:"), motor.preguntasDeTema(id), "", u);
+  }
+
+  function enviar() {
+    var texto = input.value;
+    if (!texto.trim()) return;
+    input.value = "";
+    autosize();
+    preguntar(texto);
+    input.focus({ preventScroll: true });
+  }
+
+  function autosize() {
+    input.style.height = "auto";
+    input.style.height = Math.min(input.scrollHeight + 2, 152) + "px";
+  }
+
+  /* ---------- Pantalla de inicio ---------- */
+  motor.sugerencias.forEach(function (c) { $("sugerencias").appendChild(chipDe(c)); });
+  motor.temas.forEach(function (t) { $("temas").appendChild(chipDe({ tema: t.id, pregunta: t.nombre })); });
+
+  /* ---------- Eventos ---------- */
+  sendBtn.addEventListener("click", enviar);
+  input.addEventListener("keydown", function (ev) {
+    if (ev.key === "Enter" && !ev.shiftKey && !ev.isComposing) { ev.preventDefault(); enviar(); }
+  });
+  input.addEventListener("input", autosize);
+  temasBtn.addEventListener("click", mostrarTemas);
+  resetBtn.addEventListener("click", function () {
+    Array.prototype.slice.call(thread.querySelectorAll(".msg")).forEach(function (n) { n.remove(); });
+    mostrarConversacion(false);
+    logEl.scrollTop = 0;
+    input.focus({ preventScroll: true });
+  });
+})();
+
+</script>
+</body>
+</html>
